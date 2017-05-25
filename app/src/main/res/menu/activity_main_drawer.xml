@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_admin"
+            android:icon="@drawable/appointment"
+            android:title="Admin" />
+        <item
+            android:id="@+id/nav_guard"
+            android:icon="@drawable/guard"
+            android:title="Guard_Visitorentry" />
+        <item
+            android:id="@+id/nav_teacher"
+            android:icon="@drawable/teacher"
+            android:title="Teacher_Visitorentry" />
+        <item
+            android:id="@+id/nav_vehicle"
+            android:icon="@drawable/vehicle"
+            android:title="Vehicle_Visitors" />
+
+        <item
+            android:id="@+id/nav_register_guard"
+            android:icon="@drawable/guardregister"
+            android:title="Register_Guard" />
+
+        <item
+            android:id="@+id/nav_register_teacher"
+            android:icon="@drawable/teacherregister"
+            android:title="Register_Teacher" />
+
+
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/logout"
+            android:title="Logout" />
+    </group>
+
+    <!--<item android:title="Communicate">-->
+        <!--<menu>-->
+            <!--<item-->
+                <!--android:id="@+id/nav_share"-->
+                <!--android:icon="@drawable/ic_menu_share"-->
+                <!--android:title="Share" />-->
+            <!--<item-->
+                <!--android:id="@+id/nav_send"-->
+                <!--android:icon="@drawable/ic_menu_send"-->
+                <!--android:title="Send" />-->
+        <!--</menu>-->
+    <!--</item>-->
+
+</menu>
