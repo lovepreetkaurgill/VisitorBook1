@@ -159,7 +159,7 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
         adapter.add("Electrical Engineering");
         adapter.add("Mechanical Engineering");
         adapter.add("Electroncis & Communication Engineering");
-        adapter.add("Computer Science  & Engineering");
+        adapter.add("Computer Science & Engineering");
         adapter.add("Information Technology");
         adapter.add("Production Engineering");
         adapter.add("Business Administration");
@@ -183,7 +183,7 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
 
         adapter1 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item);
         adapter1.add("--Select IDProof--");
-        adapter1.add("Aadhar card");
+        adapter1.add("Aadhar Card");
         adapter1.add("License");
         adapter1.add("PAN Card");
         adapter1.add("Voter Card");
@@ -208,6 +208,7 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
         adapter2.add("--Vehicle Type--");
         adapter2.add("Car");
         adapter2.add("Bike");
+        adapter2.add("Activa");
         adapter2.add("Auto");
         adapter2.add("Bus");
 
@@ -257,9 +258,12 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
                 rbFemale.setChecked(true);
             }
 
+            Log.i("TEST",adapter+" - "+rcvVisitorentry.getBranch()+" - "+rcvVisitorentry.getIDProof()+" - "+rcvVisitorentry.getVehicle());
+
             int p = 0;
             for(int i=0;i<adapter.getCount();i++){
                 if(adapter.getItem(i).equals(rcvVisitorentry.getBranch())){
+                    Log.i("TEST1",adapter.getItem(i)+" - "+rcvVisitorentry.getBranch());
                     p = i;
                     break;
                 }
@@ -267,8 +271,9 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
             spBranch.setSelection(p);
 
             int q = 0;
-            for(int i=0;i<adapter.getCount();i++){
-                if(adapter.getItem(i).equals(rcvVisitorentry.getBranch())){
+            for(int i=0;i<adapter1.getCount();i++){
+                if(adapter1.getItem(i).equals(rcvVisitorentry.getIDProof())){
+                    Log.i("TEST2",adapter1.getItem(i)+" - "+rcvVisitorentry.getIDProof());
                     q = i;
                     break;
                 }
@@ -276,9 +281,10 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
             spIDProof.setSelection(q);
 
             int r = 0;
-            for(int i=0;i<adapter.getCount();i++){
-                if(adapter.getItem(i).equals(rcvVisitorentry.getBranch())){
-                    r= i;
+            for(int i=0;i<adapter2.getCount();i++){
+                if(adapter2.getItem(i).equals(rcvVisitorentry.getVehicle())){
+                    Log.i("TEST3",adapter2.getItem(i)+" - "+rcvVisitorentry.getVehicle());
+                    r = i;
                     break;
                 }
             }

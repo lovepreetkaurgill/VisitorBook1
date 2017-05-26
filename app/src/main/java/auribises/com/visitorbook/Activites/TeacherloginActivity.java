@@ -1,15 +1,11 @@
 package auribises.com.visitorbook.Activites;
 
 import android.app.ProgressDialog;
-import android.content.ContentResolver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,74 +24,82 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Exchanger;
 
+import auribises.com.visitorbook.Class.Login;
 import auribises.com.visitorbook.R;
 import auribises.com.visitorbook.Util;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-
-public class TeacherloginActivity extends AppCompatActivity implements View.OnClickListener{
+public class TeacherloginActivity extends AppCompatActivity {
 
     @InjectView(R.id.usernamet)
-    EditText usernameText;
+    EditText editTextname;
 
     @InjectView(R.id.passwordt)
-    EditText passwordText;
+    EditText editTextpass;
 
     @InjectView(R.id.button)
-    Button loginButton;
+    Button btn;
 
-    ContentResolver resolver;
+    @InjectView(R.id.login)
+    TextView txtlogin;
 
-    RequestQueue requestQueue;
-    ProgressDialog progressDialog;
-    String input_username,input_password;
-    private boolean loggedIn = false;
+
     ConnectivityManager connectivityManager;
     NetworkInfo networkInfo;
 
+    String input_username,input_password;
+    private boolean loggedIn = false;
     JSONArray jsonArray;
     JSONObject jsonObjectLog;
+    RequestQueue requestQueue;
+    ProgressDialog progressDialog;
+    Login login;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacherlogin);
         ButterKnife.inject(this);
-        loginButton.setOnClickListener(this);
-        resolver=getContentResolver();
-        requestQueue= Volley.newRequestQueue(this);
+
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Logging In...");
+        progressDialog.setMessage("Please Wait..");
         progressDialog.setCancelable(false);
+
+        login=new Login();
+        requestQueue = Volley.newRequestQueue(this);
     }
 
-    @Override
-    public void onClick(View v) {
-        int id=v.getId();
-        if (id==R.id.button){
-            if(validate()) {
-                if (isNetworkConected())
+    boolean isNetworkConnected(){
+
+        connectivityManager = (ConnectivityManager)getSystemService(CONNECTIVITY_SERVICE);
+        networkInfo = connectivityManager.getActiveNetworkInfo();
+        return (networkInfo!=null && networkInfo.isConnected());
+    }
+
+    public void onClickHandler(View view){
+        if(view.getId()==R.id.button){
+            login.setUsername(editTextname.getText().toString().trim());
+            login.setPassword(editTextpass.getText().toString().trim());
+            if(validation()) {
+                if (isNetworkConnected()) {
                     login();
-                Intent i = new Intent(TeacherloginActivity.this, TeacherActivity.class);
-                startActivity(i);
-            }else
+                } else
                     Toast.makeText(this, "Please connect to Internet", Toast.LENGTH_LONG).show();
+            }else {
+                Toast.makeText(this, "Please correct Input", Toast.LENGTH_LONG).show();
             }
-        }
-
-
+        }}
 
     void login(){
 
-        input_username = usernameText.getText().toString().trim();
-        input_password = passwordText.getText().toString().trim();
+        input_username = editTextname.getText().toString().trim();
+        input_password = editTextpass.getText().toString().trim();
 
 
         progressDialog.show();
@@ -121,8 +125,8 @@ public class TeacherloginActivity extends AppCompatActivity implements View.OnCl
                     editor.putBoolean("loggedin", true);
                     editor.putString("username", input_username);
                     editor.commit();
-                    Toast.makeText(getApplicationContext(), "Login Success!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(TeacherloginActivity.this, TeacherloginActivity.class);
+                    Toast.makeText(getApplicationContext(),"Login Success!",Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(TeacherloginActivity.this, TeacherActivity.class);
                     startActivity(intent);
                     finish();
                 }else{
@@ -151,50 +155,25 @@ public class TeacherloginActivity extends AppCompatActivity implements View.OnCl
         requestQueue.add(request);
         clearFields();
     }
+
     void clearFields(){
-        usernameText.setText("");
-        passwordText.setText("");
+        editTextname.setText("");
+        editTextpass.setText("");
     }
-    public   void onResume(){
-        super.onResume();
-        SharedPreferences sharedPreferences = getSharedPreferences("loginSp", Context.MODE_PRIVATE);
-        loggedIn = sharedPreferences.getBoolean("loggedin",false);
-        if(loggedIn){
-            Intent intent = new Intent(TeacherloginActivity.this,TeacherloginActivity.class);
-            startActivity(intent);
-            finish();
+
+
+
+    boolean  validation(){
+        boolean flag =true;
+        if(login.getUsername().isEmpty()){
+            flag=false;
+            editTextname.setError("Please Enter Username");
         }
-    }
-    boolean isNetworkConected(){
-
-        connectivityManager = (ConnectivityManager)getSystemService(CONNECTIVITY_SERVICE);
-        networkInfo = connectivityManager.getActiveNetworkInfo();
-
-
-        return (networkInfo!=null && networkInfo.isConnected());
-
-    }
-    public boolean validate() {
-        boolean valid = true;
-
-        String username = usernameText.getText().toString();
-        String password = passwordText.getText().toString();
-
-        if (username.isEmpty() ) {
-            usernameText.setError("enter a valid email address");
-            valid = false;
-        } else {
-            usernameText.setError(null);
+        if(login.getPassword().isEmpty()  ){
+            flag=false;
+            editTextpass.setError("Please Enter Password");
         }
 
-        if (password.isEmpty() || password.length() < 4 || password.length() > 20) {
-            passwordText.setError("between 4 and 10 alphanumeric characters");
-            valid = false;
-        } else {
-            passwordText.setError(null);
-        }
-
-        return valid;
+        return flag;
     }
-
 }

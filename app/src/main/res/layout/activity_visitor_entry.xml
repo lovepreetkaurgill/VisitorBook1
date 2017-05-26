@@ -102,6 +102,7 @@
                 android:id="@+id/editTextDate"
                 android:hint="Date"
                 android:onClick="showDatePicker"
+                android:focusableInTouchMode="false"
                 android:layout_marginTop="10dp"/>
 
             <EditText
@@ -109,6 +110,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/editTextTime"
                 android:hint="Time"
+                android:focusableInTouchMode="false"
                 android:onClick="showTimePicker"
                 android:layout_marginTop="10dp"/>
 

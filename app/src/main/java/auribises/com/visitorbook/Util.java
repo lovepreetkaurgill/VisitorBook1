@@ -123,13 +123,13 @@ public class Util {
     public static final String CREATE_TAB_QUERYVISITORENTRY = "create table visitorentry(" +
             "_ID integer primary key autoincrement," +
             "NAME varchar(256)," +
-            "PHONE varchar(20)," +
+            "PHONE varchar(256)," +
             "EMAIL varchar(256)," +
-            "GENDER varchar(10)," +
+            "GENDER varchar(256)," +
             "ADDRESS varchar(256)," +
             "PURPOSE varchar(256)," +
-            "DATE varchar(30)," +
-            "TIME varchar(30)," +
+            "DATE varchar(256)," +
+            "TIME varchar(256)," +
             "TEACHER varchar(256)," +
             "BRANCH varchar(256)," +
             "IDPROOF varchar(256)," +

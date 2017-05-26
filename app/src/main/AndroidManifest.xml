@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activites.HomeActivity">
+        <activity android:name=".Activites.SplashActivity">
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -50,7 +50,8 @@
         <activity android:name=".Activites.RegisterTeacherActivity" />
         <activity android:name=".Activites.AllTeacherRegisterActivity" />
         <activity android:name=".Activites.RegisterAdminActivity" />
-        <activity android:name=".Activites.AdminhomeActivity"></activity>
+        <activity android:name=".Activites.AdminhomeActivity" />
+        <activity android:name=".Activites.HomeActivity"></activity>
     </application>
 
 </manifest>

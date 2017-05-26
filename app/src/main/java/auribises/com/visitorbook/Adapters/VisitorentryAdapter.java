@@ -1,6 +1,8 @@
 package auribises.com.visitorbook.Adapters;
 
 import android.content.Context;
+import auribises.com.visitorbook.Class.Visitorentry;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -58,9 +60,9 @@ public class VisitorentryAdapter extends ArrayAdapter<Visitorentry> {
         if(str.length()==0){
             visitorentryList.addAll(tempList);
         }else{
-            for(Visitorentry s : tempList){
-                if(s.getName().toLowerCase().contains(str.toLowerCase())){
-                    visitorentryList.add(s);
+            for(Visitorentry v : tempList){
+                if(v.getName().toLowerCase().contains(str.toLowerCase())){
+                    visitorentryList.add(v);
                 }
             }
         }
