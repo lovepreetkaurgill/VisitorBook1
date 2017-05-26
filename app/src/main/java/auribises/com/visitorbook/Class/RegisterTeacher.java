@@ -5,13 +5,13 @@ import java.io.Serializable;
 public class RegisterTeacher implements Serializable{
 
     int id;
-    String name,phone,email,birthdate,gender,address,qualification,experience;
+    String name,phone,email,birthdate,gender,address,qualification,experience,password;
 
     //Constructors
     public RegisterTeacher() {
     }
 
-    public RegisterTeacher(int id, String name, String phone, String email, String birthdate, String gender, String address, String qualification, String experience) {
+    public RegisterTeacher(int id, String name, String phone, String email, String birthdate, String gender, String address, String qualification, String experience, String password) {
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -21,6 +21,7 @@ public class RegisterTeacher implements Serializable{
         this.address = address;
         this.qualification = qualification;
         this.experience = experience;
+        this.password = password;
     }
 
     public int getId() {
@@ -95,6 +96,14 @@ public class RegisterTeacher implements Serializable{
         this.experience = experience;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "Details of RegisterTeacher\n" +
@@ -106,7 +115,8 @@ public class RegisterTeacher implements Serializable{
                 "\nGender is: " + gender +
                 "\nAddress is: " + address +
                 "\nQualification is: " + qualification +
-                "\nExperience is: " + experience ;
+                "\nExperience is: " + experience +
+                "\nPassword is: " + password ;
     }
 }
 

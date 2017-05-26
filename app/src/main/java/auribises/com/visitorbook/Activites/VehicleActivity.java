@@ -139,7 +139,7 @@ public class VehicleActivity extends AppCompatActivity implements CompoundButton
 
     public void clickHandler(View view){
         if(view.getId() == R.id.buttonSubmit){
-
+            insertIntoCloud();
             vehicle.setName(eTxtName.getText().toString().trim());
             vehicle.setPhone(eTxtPhone.getText().toString().trim());
             vehicle.setEmail(eTxtEmail.getText().toString().trim());

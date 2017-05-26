@@ -250,6 +250,7 @@ public class Util {
     public static final String COL_ADDRESSREGISTERGUARD = "ADDRESS";
     public static final String COL_QUALIFICATIONREGISTERGUARD = "QUALIFICATION";
     public static final String COL_EXPERIENCEREGISTERGUARD = "EXPERIENCE";
+    public static final String COL_PASSWORDREGISTERGUARD = "PASSWORD";
 
     public static final String CREATE_TAB_QUERYREGISTERGUARD = "create table RegisterGuard(" +
             "_ID integer primary key autoincrement," +
@@ -287,6 +288,7 @@ public class Util {
     public static final String COL_ADDRESSREGISTERTEACHER = "ADDRESS";
     public static final String COL_QUALIFICATIONREGISTERTEACHER = "QUALIFICATION";
     public static final String COL_EXPERIENCEREGISTERTEACHER = "EXPERIENCE";
+    public static final String COL_PASSWORDREGISTERTEACHER = "PASSWORD";
 
     public static final String CREATE_TAB_QUERYREGISTERTEACHER = "create table RegisterTeacher(" +
             "_ID integer primary key autoincrement," +
@@ -307,8 +309,8 @@ public class Util {
     public static final String KEY_BIRTHDATEREGISTERTEACHER = "keyBirthdate";
     public static final String KEY_GENDERREGISTERTEACHER = "keyGender";
     public static final String KEY_ADDRESSREGISTERTEACHER = "keyAddress";
-    public static final String KEY_PURPOSEREGISTERTEACHER = "keyQualification";
-    public static final String KEY_DATEREGISTERTEACHER = "keyExperience";
+    public static final String KEY_QUALIFICATIONREGISTERTEACHER = "keyQualification";
+    public static final String KEY_EXPERIENCEREGISTERTEACHER = "keyExperience";
 
     // URI
     public static final Uri REGISTERTEACHER_URI = Uri.parse("content://com.auribises.RegisterTeacher.teacherprovider/"+TAB_NAMETEACHER);
@@ -358,6 +360,10 @@ public class Util {
 
     public static final String keyUpdate= "update";
     public static final String keyresult = "result";
+
+    public static final String GUARD_FORGETPASSWORD_PHP = "http://tajinderj.esy.es/Guardforgetpassword/ForgetPassword.php";
+
+    public static final String TEACHER_FORGETPASSWORD_PHP = "http://tajinderj.esy.es/Teacherforgetpassword/ForgetPassword.php";
 }
 
 

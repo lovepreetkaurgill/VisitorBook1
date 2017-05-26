@@ -62,6 +62,9 @@ public class RegisterAdminActivity extends AppCompatActivity implements Compound
     @InjectView(R.id.editTextExperience)
     EditText eTxtExperience;
 
+    @InjectView(R.id.passworda)
+    EditText eTxtPassword;
+
     @InjectView(R.id.radioButtonMale)
     RadioButton rbMale;
 
@@ -152,6 +155,7 @@ public class RegisterAdminActivity extends AppCompatActivity implements Compound
             registeradmin.setAddress(eTxtAddress.getText().toString().trim());
             registeradmin.setQualification(eTxtQualification.getText().toString().trim());
             registeradmin.setExperience(eTxtExperience.getText().toString().trim());
+            registeradmin.setExperience(eTxtPassword.getText().toString().trim());
 
 
             if(validateFields()) {
@@ -215,6 +219,7 @@ public class RegisterAdminActivity extends AppCompatActivity implements Compound
                 map.put("address", registeradmin.getAddress());
                 map.put("qualification", registeradmin.getQualification());
                 map.put("experience", registeradmin.getExperience());
+                map.put("password", registeradmin.getPassword());
                 Log.i("test", registeradmin.toString());
                 return map;
             }
@@ -237,6 +242,7 @@ public class RegisterAdminActivity extends AppCompatActivity implements Compound
         eTxtAddress.setText("");
         eTxtQualification.setText("");
         eTxtExperience.setText("");
+        eTxtPassword.setText("");
     }
 
 
@@ -308,6 +314,11 @@ public class RegisterAdminActivity extends AppCompatActivity implements Compound
                 flag = false;
                 eTxtExperience.setError("Please Enter 2 digits Experience");
             }
+        }
+
+        if(registeradmin.getPassword().isEmpty()  ){
+            flag=false;
+            eTxtPassword.setError("Please Enter Password");
         }
 
         return flag;

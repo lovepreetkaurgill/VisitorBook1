@@ -112,7 +112,7 @@ public class AllTeacherRegisterActivity extends AppCompatActivity implements Ada
                     JSONArray jsonArray = jsonObject.getJSONArray("registerteacher");
 
                     int id=0;
-                    String n="",p="",e="",b="",g="",a="",q="",ex="";
+                    String n="",p="",e="",b="",g="",a="",q="",ex="",pa="";
                     for(int i=0;i<jsonArray.length();i++){
                         JSONObject jObj = jsonArray.getJSONObject(i);
 
@@ -125,8 +125,9 @@ public class AllTeacherRegisterActivity extends AppCompatActivity implements Ada
                         a = jObj.getString("address");
                         q = jObj.getString("qualification");
                         ex = jObj.getString("experience");
+                        pa = jObj.getString("password");
 
-                        registerteacherList.add(new RegisterTeacher(id,n,p,e,b,g,a,q,ex));
+                        registerteacherList.add(new RegisterTeacher(id,n,p,e,b,g,a,q,ex,pa));
                     }
 
                     adapter = new TeacherRegisterAdapter(AllTeacherRegisterActivity.this,R.layout.teacherregister_list_item, registerteacherList);

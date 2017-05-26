@@ -112,7 +112,7 @@ public class AllGuardRegisterActivity extends AppCompatActivity implements Adapt
                     JSONArray jsonArray = jsonObject.getJSONArray("registerguard");
 
                     int id=0;
-                    String n="",p="",e="",b="",g="",a="",q="",ex="";
+                    String n="",p="",e="",b="",g="",a="",q="",ex="",pa="";
                     for(int i=0;i<jsonArray.length();i++){
                         JSONObject jObj = jsonArray.getJSONObject(i);
 
@@ -125,8 +125,9 @@ public class AllGuardRegisterActivity extends AppCompatActivity implements Adapt
                         a = jObj.getString("address");
                         q = jObj.getString("qualification");
                         ex = jObj.getString("experience");
+                        pa = jObj.getString("password");
 
-                        registerguardList.add(new RegisterGuard(id,n,p,e,b,g,a,q,ex));
+                        registerguardList.add(new RegisterGuard(id,n,p,e,b,g,a,q,ex,pa));
                     }
 
                     adapter = new GuardRegisterAdapter(AllGuardRegisterActivity.this,R.layout.guardregister_list_item, registerguardList);

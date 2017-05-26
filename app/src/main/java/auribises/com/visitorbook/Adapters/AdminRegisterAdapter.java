@@ -44,7 +44,6 @@ public class AdminRegisterAdapter extends ArrayAdapter<RegisterAdmin> {
 
         RegisterAdmin _RegisterAdmin = registeradminList.get(position);
         txtName.setText(_RegisterAdmin.getName());
-        //txtGender.setText(student.getGender());
         txtGender.setText(String.valueOf(_RegisterAdmin.getId()));
 
         Log.i("Test", _RegisterAdmin.toString());

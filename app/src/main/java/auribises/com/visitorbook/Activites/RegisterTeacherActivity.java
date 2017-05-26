@@ -66,6 +66,8 @@ public class RegisterTeacherActivity extends AppCompatActivity implements Compou
     @InjectView(R.id.editTextExperience)
     EditText eTxtExperience;
 
+    @InjectView(R.id.passwordt)
+    EditText eTxtPassword;
 
     @InjectView(R.id.radioButtonMale)
     RadioButton rbMale;
@@ -136,6 +138,7 @@ public class RegisterTeacherActivity extends AppCompatActivity implements Compou
             eTxtAddress.setText(rcvRegisterTeacher.getAddress());
             eTxtQualification.setText(rcvRegisterTeacher.getQualification());
             eTxtExperience.setText(rcvRegisterTeacher.getExperience());
+            eTxtPassword.setText(rcvRegisterTeacher.getPassword());
 
             if(rcvRegisterTeacher.getGender().equals("Male")){
                 rbMale.setChecked(true);
@@ -165,8 +168,7 @@ public class RegisterTeacherActivity extends AppCompatActivity implements Compou
             registerteacher.setAddress(eTxtAddress.getText().toString().trim());
             registerteacher.setQualification(eTxtQualification.getText().toString().trim());
             registerteacher.setExperience(eTxtExperience.getText().toString().trim());
-
-
+            registerteacher.setPassword(eTxtPassword.getText().toString().trim());
 
             //insertIntoDB();
 
@@ -243,6 +245,7 @@ public class RegisterTeacherActivity extends AppCompatActivity implements Compou
                 map.put("address", registerteacher.getAddress());
                 map.put("qualification", registerteacher.getQualification());
                 map.put("experience", registerteacher.getExperience());
+                map.put("Password", registerteacher.getPassword());
                 return map;
             }
         };
@@ -277,6 +280,7 @@ public class RegisterTeacherActivity extends AppCompatActivity implements Compou
         values.put(Util.COL_ADDRESSREGISTERTEACHER, registerteacher.getAddress());
         values.put(Util.COL_QUALIFICATIONREGISTERTEACHER, registerteacher.getQualification());
         values.put(Util.COL_EXPERIENCEREGISTERTEACHER, registerteacher.getExperience());
+        values.put(Util.COL_PASSWORDREGISTERTEACHER, registerteacher.getPassword());
 
         if(!updateMode){
             Uri dummy = resolver.insert(Util.REGISTERTEACHER_URI,values);
@@ -305,6 +309,7 @@ public class RegisterTeacherActivity extends AppCompatActivity implements Compou
         eTxtAddress.setText("");
         eTxtQualification.setText("");
         eTxtExperience.setText("");
+        eTxtPassword.setText("");
         rbMale.setChecked(false);
         rbFemale.setChecked(false);
     }
@@ -376,6 +381,11 @@ public class RegisterTeacherActivity extends AppCompatActivity implements Compou
                 flag = false;
                 eTxtExperience.setError("Please Enter 2 digits Experience");
             }
+        }
+
+        if(registerteacher.getPassword().isEmpty()  ){
+            flag=false;
+            eTxtPassword.setError("Please Enter Password");
         }
 
         return flag;

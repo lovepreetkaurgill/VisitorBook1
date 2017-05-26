@@ -145,7 +145,7 @@ public class AdminloginActivity extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map <String,String>map=new HashMap<>();
 
-                map.put("phone",input_username);
+                map.put("email",input_username);
                 map.put("phone",input_password);
 
                 Log.i("username",input_username);

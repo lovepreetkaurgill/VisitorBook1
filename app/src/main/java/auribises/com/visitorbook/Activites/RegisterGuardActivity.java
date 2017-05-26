@@ -67,6 +67,9 @@ public class RegisterGuardActivity extends AppCompatActivity implements Compound
     @InjectView(R.id.editTextExperience)
     EditText eTxtExperience;
 
+    @InjectView(R.id.passwordg)
+    EditText eTxtPassword;
+
     @InjectView(R.id.radioButtonMale)
     RadioButton rbMale;
 
@@ -136,6 +139,7 @@ public class RegisterGuardActivity extends AppCompatActivity implements Compound
             eTxtAddress.setText(rcvRegisterGuard.getAddress());
             eTxtQualification.setText(rcvRegisterGuard.getQualification());
             eTxtExperience.setText(rcvRegisterGuard.getExperience());
+            eTxtPassword.setText(rcvRegisterGuard.getPassword());
 
             if(rcvRegisterGuard.getGender().equals("Male")){
                 rbMale.setChecked(true);
@@ -165,8 +169,7 @@ public class RegisterGuardActivity extends AppCompatActivity implements Compound
             registerguard.setAddress(eTxtAddress.getText().toString().trim());
             registerguard.setQualification(eTxtQualification.getText().toString().trim());
             registerguard.setExperience(eTxtExperience.getText().toString().trim());
-
-
+            registerguard.setPassword(eTxtPassword.getText().toString().trim());
 
             //insertIntoDB();
 
@@ -243,6 +246,7 @@ public class RegisterGuardActivity extends AppCompatActivity implements Compound
                 map.put("address", registerguard.getAddress());
                 map.put("qualification", registerguard.getQualification());
                 map.put("experience", registerguard.getExperience());
+                map.put("password", registerguard.getPassword());
                 return map;
             }
         };
@@ -277,6 +281,7 @@ public class RegisterGuardActivity extends AppCompatActivity implements Compound
         values.put(Util.COL_ADDRESSREGISTERGUARD, registerguard.getAddress());
         values.put(Util.COL_QUALIFICATIONREGISTERGUARD, registerguard.getQualification());
         values.put(Util.COL_EXPERIENCEREGISTERGUARD, registerguard.getExperience());
+        values.put(Util.COL_PASSWORDREGISTERGUARD, registerguard.getPassword());
 
         if(!updateMode){
             Uri dummy = resolver.insert(Util.REGISTERGUARD_URI,values);
@@ -305,6 +310,7 @@ public class RegisterGuardActivity extends AppCompatActivity implements Compound
         eTxtAddress.setText("");
         eTxtQualification.setText("");
         eTxtExperience.setText("");
+        eTxtPassword.setText("");
         rbMale.setChecked(false);
         rbFemale.setChecked(false);
     }
@@ -376,6 +382,11 @@ public class RegisterGuardActivity extends AppCompatActivity implements Compound
                 flag = false;
                 eTxtExperience.setError("Please Enter 2 digits Experience");
             }
+        }
+
+        if(registerguard.getPassword().isEmpty()  ){
+            flag=false;
+            eTxtPassword.setError("Please Enter Password");
         }
 
         return flag;
