@@ -31,10 +31,10 @@ import butterknife.InjectView;
 
 public class GuardForgetPasswordActivity extends AppCompatActivity {
 
-    @InjectView(R.id.txtEmailF)
+    @InjectView(R.id.txtEmailg)
     EditText TxtEmail;
 
-    @InjectView(R.id.buttonSubmitF)
+    @InjectView(R.id.buttonSubmitg)
     Button btnSubmit;
 
     RequestQueue requestQueue;
@@ -49,7 +49,7 @@ public class GuardForgetPasswordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guard_forget_password);
+        setContentView(R.layout.activity_guard_forget_password1);
         ButterKnife.inject(this);
 
         requestQueue = Volley.newRequestQueue(this);
@@ -72,7 +72,7 @@ public class GuardForgetPasswordActivity extends AppCompatActivity {
     }
 
     public void OnChangePass(View view) {
-        if (view.getId() == R.id.buttonSubmitF) {
+        if (view.getId() == R.id.buttonSubmitg) {
             login.setUsername(TxtEmail.getText().toString().trim());
 
             if (validateFields()) {

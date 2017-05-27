@@ -126,7 +126,7 @@ public class TeacherloginActivity extends AppCompatActivity {
                     editor.putString("username", input_username);
                     editor.commit();
                     Toast.makeText(getApplicationContext(),"Login Success!",Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(TeacherloginActivity.this, TeacherActivity.class);
+                    Intent intent = new Intent(TeacherloginActivity.this, TeacherhomeActivity.class);
                     startActivity(intent);
                     finish();
                 }else{

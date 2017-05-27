@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <group android:checkableBehavior="single">
+
         <item
             android:id="@+id/nav_admin"
             android:icon="@drawable/appointment"
-            android:title="Admin" />
+            android:title="Admin " />
         <item
             android:id="@+id/nav_guard"
             android:icon="@drawable/guard"
@@ -18,6 +18,8 @@
             android:id="@+id/nav_vehicle"
             android:icon="@drawable/vehicle"
             android:title="Vehicle_Visitors" />
+
+
 
         <item
             android:id="@+id/nav_register_guard"

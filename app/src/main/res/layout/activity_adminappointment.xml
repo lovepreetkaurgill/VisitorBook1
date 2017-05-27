@@ -100,7 +100,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:hint="Appointment Date"
-                android:onClick="showDatePicker" />
+                android:onClick="showDatePicker"
+                android:focusableInTouchMode="false"/>
 
             <EditText
                 android:id="@+id/editTextTime"
@@ -108,7 +109,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:hint="Appointment Time"
-                android:onClick="showTimePicker" />
+                android:onClick="showTimePicker"
+                android:focusableInTouchMode="false"/>
 
             <EditText
                 android:id="@+id/editTextRoom"

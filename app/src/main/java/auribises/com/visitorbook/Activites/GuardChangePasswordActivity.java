@@ -33,10 +33,10 @@ import butterknife.InjectView;
 
 public class GuardChangePasswordActivity extends AppCompatActivity {
 
-    @InjectView(R.id.textNewUsername)
+    @InjectView(R.id.textNewUsernamegu)
     TextView TxtNewUsername;
 
-    @InjectView(R.id.textNewPassword)
+    @InjectView(R.id.textNewPasswordgu)
     TextView TxtNewPassword;
 
     @InjectView(R.id.buttonSubmit)

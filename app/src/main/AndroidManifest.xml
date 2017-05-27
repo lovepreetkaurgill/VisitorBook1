@@ -54,7 +54,10 @@
         <activity android:name=".Activites.HomeActivity" />
         <activity android:name=".Activites.TeacherForgetPasswordActivity" />
         <activity android:name=".Activites.GuardChangePasswordActivity" />
-        <activity android:name=".Activites.TeacherChangePasswordActivity"></activity>
+        <activity android:name=".Activites.TeacherChangePasswordActivity" />
+        <activity android:name=".Activites.GuardForgetPasswordActivity" />
+        <activity android:name=".Activites.AdminChangePasswordActivity" />
+        <activity android:name=".Activites.TeacherhomeActivity"></activity>
     </application>
 
 </manifest>

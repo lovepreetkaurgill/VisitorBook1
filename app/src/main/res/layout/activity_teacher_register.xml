@@ -70,6 +70,7 @@
                 android:id="@+id/editTextBirthdate"
                 android:hint="Enter the Birth Date"
                 android:onClick="showDatePicker"
+                android:focusableInTouchMode="false"
                 android:layout_marginTop="10dp"/>
 
             <RadioGroup

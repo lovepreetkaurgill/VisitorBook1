@@ -105,6 +105,7 @@
                 android:id="@+id/editTextDate"
                 android:hint="Appointment Date"
                 android:onClick="showDatePicker"
+                android:focusableInTouchMode="false"
                 android:layout_marginTop="10dp"/>
 
             <EditText
@@ -113,6 +114,7 @@
                 android:id="@+id/editTextTime"
                 android:hint="Appointment Time"
                 android:onClick="showTimePicker"
+                android:focusableInTouchMode="false"
                 android:layout_marginTop="10dp"/>
 
             <EditText

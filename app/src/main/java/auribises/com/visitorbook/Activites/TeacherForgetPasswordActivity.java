@@ -31,10 +31,10 @@ import butterknife.InjectView;
 
 public class TeacherForgetPasswordActivity extends AppCompatActivity {
 
-    @InjectView(R.id.txtEmailF)
+    @InjectView(R.id.txtEmailt)
     EditText TxtEmail;
 
-    @InjectView(R.id.buttonSubmitF)
+    @InjectView(R.id.buttonSubmitt)
     Button btnSubmit;
 
     RequestQueue requestQueue;
@@ -72,7 +72,7 @@ public class TeacherForgetPasswordActivity extends AppCompatActivity {
     }
 
     public void OnChangePass(View view) {
-        if (view.getId() == R.id.buttonSubmitF) {
+        if (view.getId() == R.id.buttonSubmitt) {
             login.setUsername(TxtEmail.getText().toString().trim());
 
             if (validateFields()) {
