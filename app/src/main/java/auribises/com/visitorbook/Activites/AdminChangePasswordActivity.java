@@ -104,7 +104,7 @@ public class AdminChangePasswordActivity extends AppCompatActivity {
         String url = "";
         progressDialog.show();
 
-        url = Util.ADMINLOGIN_PHP;
+        url = Util.LOGINADMIN_PHP;
 
 
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

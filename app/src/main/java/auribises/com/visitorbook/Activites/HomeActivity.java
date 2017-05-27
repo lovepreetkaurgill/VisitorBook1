@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import auribises.com.visitorbook.MainActivity;
 import auribises.com.visitorbook.R;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -40,7 +41,7 @@ public class HomeActivity extends AppCompatActivity {
             }
 
             if (view.getId() == R.id.buttonAdmin) {
-                Intent i = new Intent(HomeActivity.this, AdminloginActivity.class);
+                Intent i = new Intent(HomeActivity.this, MainActivity.class);
                 startActivity(i);
             }
         }

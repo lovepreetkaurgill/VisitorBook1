@@ -145,7 +145,7 @@ public class GuardloginActivity extends AppCompatActivity {
                 Map <String,String>map=new HashMap<>();
 
                 map.put("email",input_username);
-                map.put("phone",input_password);
+                map.put("password",input_password);
 
                 Log.i("username",input_username);
                 Log.i("password",input_password);

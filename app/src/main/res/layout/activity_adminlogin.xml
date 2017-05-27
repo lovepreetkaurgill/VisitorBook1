@@ -113,6 +113,27 @@
                 android:textColor="@color/white" />
 
 
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:text="Forget Password"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15dp" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:text="Change Password"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15dp" />
+
+
         </LinearLayout>
     </ScrollView>
 

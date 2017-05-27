@@ -104,7 +104,7 @@ public class AdminloginActivity extends AppCompatActivity {
 
 
         progressDialog.show();
-        StringRequest request=new StringRequest(Request.Method.POST, Util.ADMINLOGIN_PHP, new Response.Listener<String>() {
+        StringRequest request=new StringRequest(Request.Method.POST, Util.LOGINADMIN_PHP, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 progressDialog.dismiss();
@@ -146,7 +146,7 @@ public class AdminloginActivity extends AppCompatActivity {
                 Map <String,String>map=new HashMap<>();
 
                 map.put("email",input_username);
-                map.put("phone",input_password);
+                map.put("password",input_password);
 
                 Log.i("username",input_username);
                 Log.i("password",input_password);

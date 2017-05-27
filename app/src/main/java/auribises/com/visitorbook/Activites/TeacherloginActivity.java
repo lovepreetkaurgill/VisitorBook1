@@ -46,6 +46,13 @@ public class TeacherloginActivity extends AppCompatActivity {
     @InjectView(R.id.button)
     Button btn;
 
+    @InjectView(R.id.forgotpasswordt)
+    TextView forgotpassword;
+
+    @InjectView(R.id.changepasswordt)
+    TextView changepassword;
+
+
     @InjectView(R.id.login)
     TextView txtlogin;
 
@@ -82,19 +89,32 @@ public class TeacherloginActivity extends AppCompatActivity {
         return (networkInfo!=null && networkInfo.isConnected());
     }
 
-    public void onClickHandler(View view){
-        if(view.getId()==R.id.button){
+    public void onClickTeacher(View view) {
+        if (view.getId() == R.id.button) {
             login.setUsername(editTextname.getText().toString().trim());
             login.setPassword(editTextpass.getText().toString().trim());
-            if(validation()) {
+            if (validation()) {
                 if (isNetworkConnected()) {
                     login();
                 } else
                     Toast.makeText(this, "Please connect to Internet", Toast.LENGTH_LONG).show();
-            }else {
+            } else {
                 Toast.makeText(this, "Please correct Input", Toast.LENGTH_LONG).show();
             }
-        }}
+        }else{
+                if(view.getId()==R.id.forgotpasswordt){
+                    Intent i=new Intent(TeacherloginActivity.this,TeacherForgetPasswordActivity.class);
+                    startActivity(i);
+                    finish();
+                }else{
+                    Intent i=new Intent(TeacherloginActivity.this,TeacherChangePasswordActivity.class);
+                    startActivity(i);
+                    //finish();
+
+                }
+            }
+        }
+
 
     void login(){
 
@@ -103,18 +123,20 @@ public class TeacherloginActivity extends AppCompatActivity {
 
 
         progressDialog.show();
-        StringRequest request=new StringRequest(Request.Method.POST, Util.LOGIN_PHP, new Response.Listener<String>() {
+        StringRequest request=new StringRequest(Request.Method.POST, Util.TEACHERLOGIN_PHP, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 progressDialog.dismiss();
                 int i = 0;
                 try {
+                    Log.i("test",response.toString());
                     JSONObject jsonObject = new JSONObject(response);
                     i = jsonObject.getInt("success");
                     jsonObjectLog = new JSONObject(response);
                     jsonArray = jsonObjectLog.getJSONArray("user");
 
                 }catch (Exception e){
+                    Log.i("test",e.toString());
                     e.printStackTrace();
                 }
 
@@ -136,6 +158,7 @@ public class TeacherloginActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.i("test",error.toString());
                 progressDialog.dismiss();
                 Toast.makeText(TeacherloginActivity.this,"Error: "+error.getMessage(),Toast.LENGTH_LONG).show();
             }
@@ -145,7 +168,7 @@ public class TeacherloginActivity extends AppCompatActivity {
                 Map <String,String>map=new HashMap<>();
 
                 map.put("email",input_username);
-                map.put("phone",input_password);
+                map.put("password",input_password);
 
                 Log.i("username",input_username);
                 Log.i("password",input_password);

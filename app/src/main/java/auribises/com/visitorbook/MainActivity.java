@@ -20,6 +20,7 @@ import auribises.com.visitorbook.Activites.HomeActivity;
 import auribises.com.visitorbook.Activites.Teacher1Activity;
 import auribises.com.visitorbook.Activites.RegisterTeacherActivity;
 import auribises.com.visitorbook.Activites.Vehicle1Activity;
+import auribises.com.visitorbook.Activites.VehicleActivity;
 import auribises.com.visitorbook.Activites.Visitor1Activity;
 
 public class MainActivity extends AppCompatActivity
@@ -103,8 +104,15 @@ public class MainActivity extends AppCompatActivity
 
 
         } else if (id == R.id.nav_vehicle) {
-            Intent i= new Intent(MainActivity.this, Vehicle1Activity.class);
+            Intent i = new Intent(MainActivity.this, Vehicle1Activity.class);
             startActivity(i);
+
+
+        }  else if (id == R.id.nav_vehicleComplaint) {
+            Intent i = new Intent(MainActivity.this, VehicleActivity.class);
+            startActivity(i);
+
+
 
 //        } else if (id == R.id.nav_update_profile) {
 

@@ -34,7 +34,7 @@ import butterknife.InjectView;
 public class TeacherChangePasswordActivity extends AppCompatActivity {
 
     @InjectView(R.id.textNewUsernamete)
-    TextView TxtNewUsername;
+    TextView TxtUsername;
 
     @InjectView(R.id.textNewPasswordte)
     TextView TxtNewPassword;
@@ -79,7 +79,7 @@ public class TeacherChangePasswordActivity extends AppCompatActivity {
 
     public void OnChangePassword(View view) {
         if (view.getId() == R.id.buttonSubmit) {
-            login.setUsername(TxtNewUsername.getText().toString().trim());
+            login.setUsername(TxtUsername.getText().toString().trim());
             login.setPassword(TxtNewPassword.getText().toString().trim());
 
             Intent i = new Intent(TeacherChangePasswordActivity.this, TeacherloginActivity.class);
@@ -104,7 +104,7 @@ public class TeacherChangePasswordActivity extends AppCompatActivity {
         String url = "";
         progressDialog.show();
 
-        url = Util.LOGINGUARD_PHP;
+        url = Util.TEACHERCHANGE_PHP;
 
 
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -142,8 +142,8 @@ public class TeacherChangePasswordActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<>();
-                map.put("username", login.getUsername());
-                map.put("password", login.getPassword());
+                map.put("email", login.getUsername());
+//                map.put("password", login.getPassword());
                 Log.i("test", login.toString());
                 return map;
 
@@ -158,7 +158,7 @@ public class TeacherChangePasswordActivity extends AppCompatActivity {
         boolean flag = true;
         if (login.getUsername().isEmpty()) {
             flag = false;
-            TxtNewUsername.setError("Please Enter Username");
+            TxtUsername.setError("Please Enter Username");
         }
 
         if (login.getPassword().isEmpty()) {

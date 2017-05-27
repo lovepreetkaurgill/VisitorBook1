@@ -57,7 +57,9 @@
         <activity android:name=".Activites.TeacherChangePasswordActivity" />
         <activity android:name=".Activites.GuardForgetPasswordActivity" />
         <activity android:name=".Activites.AdminChangePasswordActivity" />
-        <activity android:name=".Activites.TeacherhomeActivity"></activity>
+        <activity android:name=".Activites.TeacherhomeActivity" />
+        <activity android:name=".Activites.VehiclecomplaintActivity" />
+        <activity android:name=".Activites.AllVehiclecomplaintActivity"></activity>
     </application>
 
 </manifest>

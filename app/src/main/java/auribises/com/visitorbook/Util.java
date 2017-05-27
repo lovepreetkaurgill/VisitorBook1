@@ -80,13 +80,13 @@ public class Util {
     public static final int DB_VERSIONTEACHERLOGIN = 1;
     public static final String DB_NAMETEACHERLOGIN = "login.db";
 
-    // Information for login Table
-    public static final String TAB_NAMETEACHERLOGIN = "login";
+    // Information for Teacherlogin Table
+    public static final String TAB_NAMETEACHERLOGIN = "teacherlogin";
     public static final String COL_IDTEACHERLOGIN = "_ID";
     public static final String COL_USERNAMETEACHERLOGIN = "USERNAME";
     public static final String COL_PASSWORDTEACHERLOGIN = "PASSWORD";
 
-    public static final String CREATE_TAB_QUERYTEACHERLOGIN = "create table login(" +
+    public static final String CREATE_TAB_QUERYTEACHERLOGIN = "create table teacherlogin(" +
             "_ID integer primary key autoincrement," +
             "USERNAME varchar(256)," +
             "PASSWORD varchar(256)" +
@@ -96,7 +96,7 @@ public class Util {
     public static final Uri TEACHERLOGIN_URI = Uri.parse("content://auribises.com.Teacherlogin.teacherloginprovider/"+TAB_NAMETEACHERLOGIN);
 
     // URL
-    public static final String LOGIN_PHP = "http://tajinderj.esy.es/Teacherlogin/login.php";
+    public static final String TEACHERLOGIN_PHP = "http://tajinderj.esy.es/Teacherlogin/teacherlogin.php";
 
     // 4. Information for visitorentry Database
     public static final int DB_VERSIONVISITOR = 1;
@@ -169,29 +169,41 @@ public class Util {
     public static final int DB_VERSIONADMIN = 1;
     public static final String DB_NAMEADMIN = "adminlogin.db";
 
-    // Information for Login Table
-    public static final String TAB_NAMEADMINLOGIN = "Login";
+    // Information for AdminLogin Table
+    public static final String TAB_NAMEADMINLOGIN = "adminlogin";
     public static final String COL_IDADMINLOGIN = "_ID";
     public static final String COL_USERNAMEADMINLOGIN = "USERNAME";
     public static final String COL_PASSWORDADMINLOGIN = "PASSWORD";
 
+    public static final String CREATE_TAB_QUERYADMINLOGIN = "create table adminlogin(" +
+            "_ID integer primary key autoincrement," +
+            "USERNAME varchar(256)," +
+            "PASSWORD varchar(256)" +
+            ")";
+
     // URI
     public static final Uri ADMINLOGIN_URI = Uri.parse("content://com.auribises.Adminappointment.teacherprovider/"+TAB_NAMEADMINLOGIN);
 
-    final static String URIADMINLOGIN = "http://tajinderj.esy.es/Adminlogin/";
+    final static String URIADMIN = "http://tajinderj.esy.es/Adminlogin/";
 
     // URL
-    public static final String ADMINLOGIN_PHP = "http://tajinderj.esy.es/Adminlogin/login.php";
+    public static final String LOGINADMIN_PHP = "http://tajinderj.esy.es/Adminlogin/adminlogin.php";
 
     // 6. Information for guardlogin Database
     public static final int DB_VERSIONGUARD = 1;
     public static final String DB_NAMEGUARD = "guardlogin.db";
 
-    // Information for Login Table
-    public static final String TAB_NAMEGUARDLOGIN = "Login";
+    // Information for GuardLogin Table
+    public static final String TAB_NAMEGUARDLOGIN = "guardlogin";
     public static final String COL_IDGUARDLOGIN = "_ID";
     public static final String COL_USERNAMEGUARDLOGIN = "USERNAME";
     public static final String COL_PASSWORDGUARDLOGIN = "PASSWORD";
+
+    public static final String CREATE_TAB_QUERYGUARDLOGIN = "create table guardlogin(" +
+            "_ID integer primary key autoincrement," +
+            "USERNAME varchar(256)," +
+            "PASSWORD varchar(256)" +
+            ")";
 
     // URI
     public static final Uri GUARDLOGIN_URI = Uri.parse("content://com.auribises.Adminappointment.teacherprovider/"+TAB_NAMEGUARDLOGIN);
@@ -199,13 +211,13 @@ public class Util {
     final static String URIGUARD = "http://tajinderj.esy.es/Guardlogin/";
 
     // URL
-    public static final String LOGINGUARD_PHP = "http://tajinderj.esy.es/Guardlogin/login.php";
+    public static final String LOGINGUARD_PHP = "http://tajinderj.esy.es/Guardlogin/guardlogin.php";
 
     // 7. Information for RegisterAdmin Database
     public static final int DB_VERSIONREGISTERADMIN = 1;
     public static final String DB_NAMEREGISTERADMIN = "RegisterAdmin.db";
 
-    // Information for RegisterGuard Table
+    // Information for RegisterAdmin Table
     public static final String TAB_NAMEREGISTERADMIN = "RegisterAdmin";
     public static final String COL_IDREGISTERADMIN = "_ID";
     public static final String COL_NAMEREGISTERADMIN = "NAME";
@@ -216,6 +228,7 @@ public class Util {
     public static final String COL_ADDRESSREGISTERADMIN = "ADDRESS";
     public static final String COL_QUALIFICATIONREGISTERADMIN = "QUALIFICATION";
     public static final String COL_EXPERIENCEREGISTERADMIN = "EXPERIENCE";
+    public static final String COL_PASSWORDREGISTERADMIN = "PASSWORD";
 
     public static final String CREATE_TAB_QUERYREGISTERADMIN = "create table RegisterAdmin(" +
             "_ID integer primary key autoincrement," +
@@ -226,7 +239,8 @@ public class Util {
             "GENDER varchar(256)," +
             "ADDRESS varchar(256)," +
             "QUALIFICATION varchar(256)," +
-            "EXPERIENCE varchar(256)" +
+            "EXPERIENCE varchar(256)," +
+            "PASSWORD varchar(256)" +
             ")";
 
     // URI
@@ -261,7 +275,8 @@ public class Util {
             "GENDER varchar(256)," +
             "ADDRESS varchar(256)," +
             "QUALIFICATION varchar(256)," +
-            "EXPERIENCE varchar(256)" +
+            "EXPERIENCE varchar(256)," +
+            "PASSWORD varchar(256)" +
             ")";
 
     // URI
@@ -299,7 +314,8 @@ public class Util {
             "GENDER varchar(256)," +
             "ADDRESS varchar(256)," +
             "QUALIFICATION varchar(256)," +
-            "EXPERIENCE varchar(256)" +
+            "EXPERIENCE varchar(256)," +
+            "PASSWORD varchar(256)" +
             ")";
 
     //     REGISTER TEACHER
@@ -311,6 +327,7 @@ public class Util {
     public static final String KEY_ADDRESSREGISTERTEACHER = "keyAddress";
     public static final String KEY_QUALIFICATIONREGISTERTEACHER = "keyQualification";
     public static final String KEY_EXPERIENCEREGISTERTEACHER = "keyExperience";
+    public static final String KEY_PASSWORDREGISTERTEACHER = "keyPassword";
 
     // URI
     public static final Uri REGISTERTEACHER_URI = Uri.parse("content://com.auribises.RegisterTeacher.teacherprovider/"+TAB_NAMETEACHER);
@@ -364,6 +381,9 @@ public class Util {
     public static final String GUARD_FORGETPASSWORD_PHP = "http://tajinderj.esy.es/Guardforgetpassword/ForgetPassword.php";
 
     public static final String TEACHER_FORGETPASSWORD_PHP = "http://tajinderj.esy.es/Teacherforgetpassword/ForgetPassword.php";
+
+    // URL
+    public static final String TEACHERCHANGE_PHP = "http://tajinderj.esy.es/Teacherchangepassword/teacherchange.php";
 }
 
 
