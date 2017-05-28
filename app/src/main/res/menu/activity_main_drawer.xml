@@ -3,38 +3,33 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/nav_admin"
-            android:icon="@drawable/appointment"
-            android:title="Admin " />
+            android:id="@+id/nav_register_guard"
+            android:icon="@drawable/guardregister"
+            android:title="Register_Guard" />
         <item
-            android:id="@+id/nav_guard"
-            android:icon="@drawable/guard"
-            android:title="Guard_Visitorentry" />
+            android:id="@+id/nav_register_teacher"
+            android:icon="@drawable/teacherregister"
+            android:title="Register_Teacher" />
         <item
             android:id="@+id/nav_teacher"
             android:icon="@drawable/teacher"
             android:title="Teacher_Visitorentry" />
         <item
+            android:id="@+id/nav_guard"
+            android:icon="@drawable/guard"
+            android:title="Guard_Visitorentry" />
+        <item
             android:id="@+id/nav_vehicle"
             android:icon="@drawable/vehicle"
             android:title="Vehicle_Visitors" />
-
+        <item
+            android:id="@+id/nav_admin"
+            android:icon="@drawable/appointment"
+            android:title="Admin_Appointment " />
         <item
             android:id="@+id/nav_vehicleComplaint"
             android:icon="@drawable/vehicle"
             android:title="Vehicle_Complaint" />
-
-        <item
-            android:id="@+id/nav_register_guard"
-            android:icon="@drawable/guardregister"
-            android:title="Register_Guard" />
-
-        <item
-            android:id="@+id/nav_register_teacher"
-            android:icon="@drawable/teacherregister"
-            android:title="Register_Teacher" />
-
-
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/logout"

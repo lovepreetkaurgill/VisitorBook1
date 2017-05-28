@@ -32,8 +32,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import auribises.com.visitorbook.Adapters.VehicleAdapter;
-import auribises.com.visitorbook.Class.Vehicle;
+
+
+import auribises.com.visitorbook.Adapters.VehiclecomplaintAdapter;
+import auribises.com.visitorbook.Class.Vehiclecomplaint;
 import auribises.com.visitorbook.R;
 import auribises.com.visitorbook.Util;
 import butterknife.ButterKnife;
@@ -47,11 +49,11 @@ public class AllVehiclecomplaintActivity extends AppCompatActivity implements Ad
     @InjectView(R.id.editTextSearch)
     EditText eTxtSearch;
 
-    ArrayList<Vehicle> vehicleList;
+    ArrayList<Vehiclecomplaint> vehiclecomplaintList;
 
-    VehicleAdapter adapter;
+    VehiclecomplaintAdapter adapter;
 
-    Vehicle vehicle;
+    Vehiclecomplaint vehiclecomplaint;
     int pos;
 
     RequestQueue requestQueue;
@@ -126,7 +128,7 @@ public class AllVehiclecomplaintActivity extends AppCompatActivity implements Ad
 
         progressDialog.show();
 
-        vehicleList = new ArrayList<>();
+        vehiclecomplaintList = new ArrayList<>();
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, Util.RETRIEVE_VEHICLE_PHP, new Response.Listener<String>() {
             @Override
@@ -150,10 +152,11 @@ public class AllVehiclecomplaintActivity extends AppCompatActivity implements Ad
                         v = jObj.getString("Vehicle");
                         vn = jObj.getString("Vehiclenumber");
 
-                        vehicleList.add(new Vehicle(id,n,p,e,g,v,vn));
+                        vehiclecomplaintList.add(new Vehiclecomplaint(id,n,p,e,g,v,vn));
                     }
 
-                    adapter = new VehicleAdapter(AllVehiclecomplaintActivity.this,R.layout.vehicle1_list_item, vehicleList);
+
+                    adapter = new VehiclecomplaintAdapter(AllVehiclecomplaintActivity.this,R.layout.vehiclecomplaint_list_item, vehiclecomplaintList);
                     listView.setAdapter(adapter);
                     listView.setOnItemClickListener(AllVehiclecomplaintActivity.this);
 
@@ -184,7 +187,7 @@ public class AllVehiclecomplaintActivity extends AppCompatActivity implements Ad
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         pos = i;
-        vehicle = vehicleList.get(i);
+        vehiclecomplaint = vehiclecomplaintList.get(i);
         showOptions();
     }
 
@@ -197,17 +200,17 @@ public class AllVehiclecomplaintActivity extends AppCompatActivity implements Ad
 
                 switch (i){
                     case 0:
-                        showVehicle();
+                        showVehicleComplaint();
                         break;
 
                     case 1:
                         Intent intent = new Intent(AllVehiclecomplaintActivity.this,VehicleActivity.class);
-                        intent.putExtra("keyVehicle", vehicle);
+                        intent.putExtra("keyVehicle", vehiclecomplaint);
                         startActivity(intent);
                         break;
 
                     case 2:
-                        deleteVehicle();
+                        deleteVehicleComplaint();
                         break;
                 }
 
@@ -218,17 +221,17 @@ public class AllVehiclecomplaintActivity extends AppCompatActivity implements Ad
         builder.create().show();
     }
 
-    void showVehicle(){
+    void showVehicleComplaint(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Details of "+ vehicle.getName());
-        builder.setMessage(vehicle.toString());
+        builder.setTitle("Details of "+ vehiclecomplaint.getName());
+        builder.setMessage(vehiclecomplaint.toString());
         builder.setPositiveButton("Done",null);
         builder.create().show();
     }
 
-    void deleteVehicle(){
+    void deleteVehicleComplaint(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Delete "+ vehicle.getName());
+        builder.setTitle("Delete "+ vehiclecomplaint.getName());
         builder.setMessage("Do you wish to Delete?");
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
@@ -254,7 +257,7 @@ public class AllVehiclecomplaintActivity extends AppCompatActivity implements Ad
                     String message = jsonObject.getString("message");
 
                     if(success == 1){
-                        vehicleList.remove(pos);
+                        vehiclecomplaintList.remove(pos);
                         adapter.notifyDataSetChanged();
                         Toast.makeText(AllVehiclecomplaintActivity.this,message,Toast.LENGTH_LONG).show();
                     }else{
@@ -278,7 +281,7 @@ public class AllVehiclecomplaintActivity extends AppCompatActivity implements Ad
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> map = new HashMap<>();
-                map.put("id",String.valueOf(vehicle.getId()));
+                map.put("id",String.valueOf(vehiclecomplaint.getId()));
                 return map;
             }
         };

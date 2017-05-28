@@ -4,21 +4,21 @@ import android.net.Uri;
 
 public class Util {
 
-    // 1. Information for Vehicle Database
+    // 0. Information for Vehiclecomplaint Database
     public static final int DB_VERSION = 1;
-    public static final String DB_NAME = "Vehicle.db";
+    public static final String DB_NAME = "Vehiclecomplaint.db";
 
-    // Information for Vehicle Table
-    public static final String TAB_NAMEVEHICLE = "Vehicle";
-    public static final String COL_IDVEHICLE = "_ID";
-    public static final String COL_NAMEVEHICLE = "NAME";
-    public static final String COL_PHONEVEHICLE = "PHONE";
-    public static final String COL_EMAILVEHICLE = "EMAIL";
-    public static final String COL_GENDERVEHICLE = "GENDER";
-    public static final String COL_VEHICLEVEHICLE = "VEHICLE";
-    public static final String COL_VEHICLENUMBERVEHICLE = "VEHICLENUMBER";
+    // Information for Vehiclecomplaint Table
+    public static final String TAB_NAMEVEHICLECOMPLAINT = "Vehiclecomplaint";
+    public static final String COL_IDVEHICLECOMPLAINT = "_ID";
+    public static final String COL_NAMEVEHICLECOMPLAINT = "NAME";
+    public static final String COL_PHONEVEHICLECOMPLAINT = "PHONE";
+    public static final String COL_EMAILVEHICLECOMPLAINT = "EMAIL";
+    public static final String COL_GENDERVEHICLECOMPLAINT = "GENDER";
+    public static final String COL_VEHICLEVEHICLECOMPLAINT = "VEHICLE";
+    public static final String COL_VEHICLENUMBERVEHICLECOMPLAINT = "VEHICLENUMBER";
 
-    public static final String CREATE_TAB_QUERY = "create table Vehicle(" +
+    public static final String CREATE_TAB_QUERYVEHICLECOMPLAINT = "create table Vehiclecomplaint(" +
             "_ID integer primary key autoincrement," +
             "NAME varchar(256)," +
             "PHONE varchar(20)," +
@@ -29,15 +29,48 @@ public class Util {
             ")";
 
     // URI
-    public static final Uri VEHICLE_URI = Uri.parse("content://auribises.com.vehicle.teacherprovider/"+TAB_NAMEVEHICLE);
+   public static final Uri VEHICLECOMPLAINT_URI = Uri.parse("content://auribises.com.vehicle.teacherprovider/"+TAB_NAMEVEHICLECOMPLAINT);
 
     // URL
-    public static final String INSERT_VEHICLE_PHP = "http://tajinderj.esy.es/Vehicle/insert.php";
-    public static final String RETRIEVE_VEHICLE_PHP = "http://tajinderj.esy.es/Vehicle/retrieve.php";
-    public static final String DELETE_VEHICLE_PHP = "http://tajinderj.esy.es/Vehicle/delete.php";
-    public static final String UPDATE_VEHICLE_PHP = "http://tajinderj.esy.es/Vehicle/update.php";
+    public static final String INSERT_VEHICLECOMPLAINT_PHP = "http://tajinderj.esy.es/Vehiclecomplaint/insert.php";
+    public static final String RETRIEVE_VEHICLECOMPLAINT_PHP = "http://tajinderj.esy.es/Vehiclecomplaint/retrieve.php";
+    public static final String DELETE_VEHICLECOMPLAINT_PHP = "http://tajinderj.esy.es/Vehiclecomplaint/delete.php";
+    public static final String UPDATE_VEHICLECOMPLAINT_PHP = "http://tajinderj.esy.es/Vehiclecomplaint/update.php";
 
-    // 2. Information for Teacher Database
+
+ //1. Information for Vehicle Table
+ public static final String TAB_NAMEVEHICLE = "Vehicle";
+ public static final String COL_IDVEHICLE = "_ID";
+ public static final String COL_NAMEVEHICLE = "NAME";
+ public static final String COL_PHONEVEHICLE = "PHONE";
+ public static final String COL_EMAILVEHICLE = "EMAIL";
+ public static final String COL_GENDERVEHICLE = "GENDER";
+ public static final String COL_VEHICLEVEHICLE = "VEHICLE";
+ public static final String COL_VEHICLENUMBERVEHICLE = "VEHICLENUMBER";
+
+ public static final String CREATE_TAB_QUERYVEHICLE = "create table Vehicle(" +
+         "_ID integer primary key autoincrement," +
+         "NAME varchar(256)," +
+         "PHONE varchar(20)," +
+         "EMAIL varchar(256)," +
+         "GENDER varchar(10)," +
+         "VEHICLE varchar(256)," +
+         "VEHICLENUMBER varchar(256)" +
+         ")";
+
+ // URI
+ public static final Uri VEHICLE_URI = Uri.parse("content://auribises.com.vehicle.teacherprovider/"+TAB_NAMEVEHICLE);
+
+ // URL
+ public static final String INSERT_VEHICLE_PHP = "http://tajinderj.esy.es/Vehicle/insert.php";
+ public static final String RETRIEVE_VEHICLE_PHP = "http://tajinderj.esy.es/Vehicle/retrieve.php";
+ public static final String DELETE_VEHICLE_PHP = "http://tajinderj.esy.es/Vehicle/delete.php";
+ public static final String UPDATE_VEHICLE_PHP = "http://tajinderj.esy.es/Vehicle/update.php";
+
+
+
+
+ // 2. Information for Teacher Database
     public static final int DB_VERSIONTEACHER = 1;
     public static final String DB_NAMETEACHER = "Teacher.db";
 
@@ -187,7 +220,7 @@ public class Util {
     final static String URIADMIN = "http://tajinderj.esy.es/Adminlogin/";
 
     // URL
-    public static final String LOGINADMIN_PHP = "http://tajinderj.esy.es/Adminlogin/adminlogin.php";
+    public static final String ADMINLOGIN_PHP = "http://tajinderj.esy.es/Adminlogin/adminlogin.php";
 
     // 6. Information for guardlogin Database
     public static final int DB_VERSIONGUARD = 1;
@@ -382,8 +415,14 @@ public class Util {
 
     public static final String TEACHER_FORGETPASSWORD_PHP = "http://tajinderj.esy.es/Teacherforgetpassword/ForgetPassword.php";
 
+    public static final String ADMIN_FORGETPASSWORD_PHP = "http://tajinderj.esy.es/Adminforgetpassword/ForgetPassword.php";
+
     // URL
-    public static final String TEACHERCHANGE_PHP = "http://tajinderj.esy.es/Teacherchangepassword/teacherchange.php";
+    public static final String TEACHERCHANGEPASSWORD_PHP = "http://tajinderj.esy.es/Teacherchangepassword/teacherchange.php";
+
+    public static final String GUARDCHANGEPASSWORD_PHP = "http://tajinderj.esy.es/Guardchangepassword/teacherchange.php";
+
+    public static final String ADMINCHANGEPASSWORD_PHP = "http://tajinderj.esy.es/Adminchangepassword/teacherchange.php";
 }
 
 

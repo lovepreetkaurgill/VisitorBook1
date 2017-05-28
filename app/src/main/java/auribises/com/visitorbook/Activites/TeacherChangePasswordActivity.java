@@ -104,7 +104,7 @@ public class TeacherChangePasswordActivity extends AppCompatActivity {
         String url = "";
         progressDialog.show();
 
-        url = Util.TEACHERCHANGE_PHP;
+        url = Util.TEACHERCHANGEPASSWORD_PHP;
 
 
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -152,6 +152,10 @@ public class TeacherChangePasswordActivity extends AppCompatActivity {
         requestQueue.add(request); // execute the request, send it to server
 
 
+    }
+    void clearFields(){
+        TxtUsername.setText("");
+        TxtNewPassword.setText("");
     }
 
     Boolean validateFields() {

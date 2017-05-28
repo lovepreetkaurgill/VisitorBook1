@@ -46,6 +46,13 @@ public class GuardloginActivity extends AppCompatActivity {
     @InjectView(R.id.button)
     Button btn;
 
+    @InjectView(R.id.forgotpasswordg)
+    TextView fp;
+
+    @InjectView(R.id.changepasswordg)
+    TextView cp;
+
+
     @InjectView(R.id.login)
     TextView txtlogin;
 
@@ -82,7 +89,7 @@ public class GuardloginActivity extends AppCompatActivity {
         return (networkInfo!=null && networkInfo.isConnected());
     }
 
-    public void onClickHandler(View view){
+    public void onClickGuard(View view){
         if(view.getId()==R.id.button){
             login.setUsername(editTextname.getText().toString().trim());
             login.setPassword(editTextpass.getText().toString().trim());
@@ -94,7 +101,21 @@ public class GuardloginActivity extends AppCompatActivity {
             }else {
                 Toast.makeText(this, "Please correct Input", Toast.LENGTH_LONG).show();
             }
-        }}
+        }else{
+            if(view.getId()==R.id.forgotpasswordg){
+                Intent i=new Intent(GuardloginActivity.this,TeacherForgetPasswordActivity.class);
+                startActivity(i);
+                finish();
+            }else{
+                Intent i=new Intent(GuardloginActivity.this,TeacherChangePasswordActivity.class);
+                startActivity(i);
+                //finish();
+
+            }
+        }
+    }
+
+
 
     void login(){
 
@@ -159,9 +180,8 @@ public class GuardloginActivity extends AppCompatActivity {
     void clearFields(){
         editTextname.setText("");
         editTextpass.setText("");
+
     }
-
-
 
     boolean  validation(){
         boolean flag =true;

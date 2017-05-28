@@ -30,7 +30,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import auribises.com.visitorbook.Class.Login;
-import auribises.com.visitorbook.MainActivity;
 import auribises.com.visitorbook.R;
 import auribises.com.visitorbook.Util;
 import butterknife.ButterKnife;
@@ -47,6 +46,13 @@ public class AdminloginActivity extends AppCompatActivity {
     @InjectView(R.id.button)
     Button btn;
 
+    @InjectView(R.id.forgotpassworda)
+    TextView forgotpassword;
+
+    @InjectView(R.id.changepassworda)
+    TextView changepassword;
+
+
     @InjectView(R.id.login)
     TextView txtlogin;
 
@@ -54,7 +60,7 @@ public class AdminloginActivity extends AppCompatActivity {
     ConnectivityManager connectivityManager;
     NetworkInfo networkInfo;
 
-    String input_username,input_password;
+    String input_username, input_password;
     private boolean loggedIn = false;
     JSONArray jsonArray;
     JSONObject jsonObjectLog;
@@ -65,7 +71,7 @@ public class AdminloginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_adminlogin);
+        setContentView(R.layout.activity_teacherlogin);
         ButterKnife.inject(this);
 
         progressDialog = new ProgressDialog(this);
@@ -76,26 +82,41 @@ public class AdminloginActivity extends AppCompatActivity {
         requestQueue = Volley.newRequestQueue(this);
     }
 
-    boolean isNetworkConnected(){
+    boolean isNetworkConnected() {
 
-        connectivityManager = (ConnectivityManager)getSystemService(CONNECTIVITY_SERVICE);
+        connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         networkInfo = connectivityManager.getActiveNetworkInfo();
-        return (networkInfo!=null && networkInfo.isConnected());
+        return (networkInfo != null && networkInfo.isConnected());
     }
 
-    public void onClickHandler(View view){
-        if(view.getId()==R.id.button){
+    public void onClickAdmin(View view) {
+        if (view.getId() == R.id.button) {
             login.setUsername(editTextname.getText().toString().trim());
             login.setPassword(editTextpass.getText().toString().trim());
-            if(validation()) {
+            if (validation()) {
                 if (isNetworkConnected()) {
                     login();
                 } else
                     Toast.makeText(this, "Please connect to Internet", Toast.LENGTH_LONG).show();
-            }else {
+            } else {
                 Toast.makeText(this, "Please correct Input", Toast.LENGTH_LONG).show();
             }
-        }}
+        } else {
+            if (view.getId() == R.id.forgotpassworda) {
+                Intent i = new Intent(AdminloginActivity.this, TeacherForgetPasswordActivity.class);
+                startActivity(i);
+                finish();
+            } else {
+                Intent i = new Intent(AdminloginActivity.this, TeacherChangePasswordActivity.class);
+                startActivity(i);
+                //finish();
+
+            }
+
+
+}
+}
+
 
     void login(){
 
@@ -104,18 +125,20 @@ public class AdminloginActivity extends AppCompatActivity {
 
 
         progressDialog.show();
-        StringRequest request=new StringRequest(Request.Method.POST, Util.LOGINADMIN_PHP, new Response.Listener<String>() {
+        StringRequest request=new StringRequest(Request.Method.POST, Util.ADMINLOGIN_PHP, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 progressDialog.dismiss();
                 int i = 0;
                 try {
+                    Log.i("test",response.toString());
                     JSONObject jsonObject = new JSONObject(response);
                     i = jsonObject.getInt("success");
                     jsonObjectLog = new JSONObject(response);
                     jsonArray = jsonObjectLog.getJSONArray("user");
 
                 }catch (Exception e){
+                    Log.i("test",e.toString());
                     e.printStackTrace();
                 }
 
@@ -126,8 +149,8 @@ public class AdminloginActivity extends AppCompatActivity {
                     editor.putBoolean("loggedin", true);
                     editor.putString("username", input_username);
                     editor.commit();
-                    Toast.makeText(getApplicationContext(),"Login Success!",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(AdminloginActivity.this, MainActivity.class);
+                    Toast.makeText(getApplicationContext(),"Login Success!",Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(AdminloginActivity.this, TeacherhomeActivity.class);
                     startActivity(intent);
                     finish();
                 }else{
@@ -137,6 +160,7 @@ public class AdminloginActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.i("test",error.toString());
                 progressDialog.dismiss();
                 Toast.makeText(AdminloginActivity.this,"Error: "+error.getMessage(),Toast.LENGTH_LONG).show();
             }

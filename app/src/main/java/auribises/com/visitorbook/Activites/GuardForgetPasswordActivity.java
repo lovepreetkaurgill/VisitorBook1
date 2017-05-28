@@ -140,6 +140,11 @@ public class GuardForgetPasswordActivity extends AppCompatActivity {
         requestQueue.add(request); // execute the request, send it to server
 
     }
+
+    void clearFields(){
+        TxtEmail.setText("");
+    }
+
     boolean validateFields() {
         boolean flag = true;
         if (login.getUsername().isEmpty()) {

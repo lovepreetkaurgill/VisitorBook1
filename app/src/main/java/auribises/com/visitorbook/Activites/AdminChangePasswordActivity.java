@@ -104,7 +104,7 @@ public class AdminChangePasswordActivity extends AppCompatActivity {
         String url = "";
         progressDialog.show();
 
-        url = Util.LOGINADMIN_PHP;
+        url = Util.ADMINCHANGEPASSWORD_PHP;
 
 
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -152,6 +152,10 @@ public class AdminChangePasswordActivity extends AppCompatActivity {
         requestQueue.add(request); // execute the request, send it to server
 
 
+    }
+    void clearFields(){
+        TxtNewUsername.setText("");
+        TxtNewPassword.setText("");
     }
 
     Boolean validateFields() {

@@ -104,7 +104,7 @@ public class GuardChangePasswordActivity extends AppCompatActivity {
         String url = "";
         progressDialog.show();
 
-        url = Util.LOGINGUARD_PHP;
+        url = Util.GUARDCHANGEPASSWORD_PHP;
 
 
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -152,6 +152,10 @@ public class GuardChangePasswordActivity extends AppCompatActivity {
         requestQueue.add(request); // execute the request, send it to server
 
 
+    }
+    void clearFields(){
+        TxtNewUsername.setText("");
+        TxtNewPassword.setText("");
     }
 
     Boolean validateFields() {

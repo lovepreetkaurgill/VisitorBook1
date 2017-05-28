@@ -17,20 +17,20 @@ import auribises.com.visitorbook.Class.Vehiclecomplaint;
 import auribises.com.visitorbook.R;
 
 
-public class VehicleAdapter extends ArrayAdapter<Vehicle> {
+public class VehiclecomplaintAdapter extends ArrayAdapter<Vehiclecomplaint> {
 
     Context context;
     int resource;
-    ArrayList<Vehicle> vehicleList,tempList;
+    ArrayList<Vehiclecomplaint> vehiclecomplaintList,tempList;
 
-    public VehicleAdapter(Context context, int resource, ArrayList<Vehicle> objects) {
+    public VehiclecomplaintAdapter(Context context, int resource, ArrayList<Vehiclecomplaint> objects) {
         super(context, resource, objects);
 
         this.context = context;
         this.resource = resource;
-        vehicleList = objects;
+        vehiclecomplaintList = objects;
         tempList = new ArrayList<>();
-        tempList.addAll(vehicleList);
+        tempList.addAll(vehiclecomplaintList);
     }
 
     @NonNull
@@ -44,25 +44,25 @@ public class VehicleAdapter extends ArrayAdapter<Vehicle> {
         TextView txtName = (TextView)view.findViewById(R.id.textViewName);
         TextView txtGender = (TextView)view.findViewById(R.id.textViewGender);
 
-        Vehicle vehicle = vehicleList.get(position);
-        txtName.setText(vehicle.getName());
-        txtGender.setText(String.valueOf(vehicle.getId()));
+        Vehiclecomplaint vehiclecomplaint = vehiclecomplaintList.get(position);
+        txtName.setText(vehiclecomplaint.getName());
+        txtGender.setText(String.valueOf(vehiclecomplaint.getId()));
 
-        Log.i("Test", vehicle.toString());
+        Log.i("Test", vehiclecomplaint.toString());
 
         return view;
     }
 
     public void filter(String str){
 
-        vehicleList.clear();
+        vehiclecomplaintList.clear();
 
         if(str.length()==0){
-            vehicleList.addAll(tempList);
+            vehiclecomplaintList.addAll(tempList);
         }else{
-            for(Vehicle s : tempList){
+            for(Vehiclecomplaint s : tempList){
                 if(s.getName().toLowerCase().contains(str.toLowerCase())){
-                    vehicleList.add(s);
+                    vehiclecomplaintList.add(s);
                 }
             }
         }

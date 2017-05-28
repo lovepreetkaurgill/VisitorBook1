@@ -29,13 +29,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
-
-import auribises.com.visitorbook.Class.Vehicle;
+import auribises.com.visitorbook.Class.Vehiclecomplaint;
 import auribises.com.visitorbook.R;
 import auribises.com.visitorbook.Util;
 import butterknife.ButterKnife;
@@ -67,7 +64,7 @@ public class VehiclecomplaintActivity extends AppCompatActivity implements Compo
     @InjectView(R.id.buttonSubmit)
     Button btnSubmit;
 
-    Vehicle vehicle, rcvVehicle;
+    Vehiclecomplaint vehiclecomplaint, rcvVehiclecomplaint;
 
 
     boolean updateMode;
@@ -96,7 +93,7 @@ public class VehiclecomplaintActivity extends AppCompatActivity implements Compo
         progressDialog.setMessage("Please Wait..");
         progressDialog.setCancelable(false);
 
-        vehicle = new Vehicle();
+        vehiclecomplaint = new Vehiclecomplaint();
 
         rbMale.setOnCheckedChangeListener(this);
         rbFemale.setOnCheckedChangeListener(this);
@@ -109,14 +106,14 @@ public class VehiclecomplaintActivity extends AppCompatActivity implements Compo
 
 
         if(updateMode){
-            rcvVehicle = (Vehicle)rcv.getSerializableExtra("keyVehicle");
-            eTxtName.setText(rcvVehicle.getName());
-            eTxtPhone.setText(rcvVehicle.getPhone());
-            eTxtEmail.setText(rcvVehicle.getEmail());
-            eTxtVehicle.setText(rcvVehicle.getVehicle());
-            eTxtVehicleNumber.setText(rcvVehicle.getVehiclenumber());
+            rcvVehiclecomplaint = (Vehiclecomplaint) rcv.getSerializableExtra("keyVehicle");
+            eTxtName.setText(rcvVehiclecomplaint.getName());
+            eTxtPhone.setText(rcvVehiclecomplaint.getPhone());
+            eTxtEmail.setText(rcvVehiclecomplaint.getEmail());
+            eTxtVehicle.setText(rcvVehiclecomplaint.getVehicle());
+            eTxtVehicleNumber.setText(rcvVehiclecomplaint.getVehiclenumber());
 
-            if(rcvVehicle.getGender().equals("Male")){
+            if(rcvVehiclecomplaint.getGender().equals("Male")){
                 rbMale.setChecked(true);
             }else{
                 rbFemale.setChecked(true);
@@ -132,7 +129,7 @@ public class VehiclecomplaintActivity extends AppCompatActivity implements Compo
         connectivityManager = (ConnectivityManager)getSystemService(CONNECTIVITY_SERVICE);
         networkInfo = connectivityManager.getActiveNetworkInfo();
 
-        Log.i("insertIntoCloud",vehicle.toString());
+        Log.i("insertIntoCloud",vehiclecomplaint.toString());
         return (networkInfo!=null && networkInfo.isConnected());
 
     }
@@ -140,11 +137,11 @@ public class VehiclecomplaintActivity extends AppCompatActivity implements Compo
     public void clickHandler(View view){
         if(view.getId() == R.id.buttonSubmit){
             insertIntoCloud();
-            vehicle.setName(eTxtName.getText().toString().trim());
-            vehicle.setPhone(eTxtPhone.getText().toString().trim());
-            vehicle.setEmail(eTxtEmail.getText().toString().trim());
-            vehicle.setVehicle(eTxtVehicle.getText().toString().trim());
-            vehicle.setVehiclenumber(eTxtVehicleNumber.getText().toString().trim());
+            vehiclecomplaint.setName(eTxtName.getText().toString().trim());
+            vehiclecomplaint.setPhone(eTxtPhone.getText().toString().trim());
+            vehiclecomplaint.setEmail(eTxtEmail.getText().toString().trim());
+            vehiclecomplaint.setVehicle(eTxtVehicle.getText().toString().trim());
+            vehiclecomplaint.setVehiclenumber(eTxtVehicleNumber.getText().toString().trim());
 
             if(validateFields()) {
                 if (isNetworkConected())
@@ -187,11 +184,11 @@ public class VehiclecomplaintActivity extends AppCompatActivity implements Compo
 
                         if(!updateMode){
 
-                            editor.putString(Util.KEY_NAME, vehicle.getName());
-                            editor.putString(Util.KEY_PHONE, vehicle.getPhone());
-                            editor.putString(Util.KEY_EMAIL, vehicle.getEmail());
-                            editor.putString(Util.KEY_VEHICLE, vehicle.getVehicle());
-                            editor.putString(Util.KEY_VEHICLENUMBER, vehicle.getVehiclenumber());
+                            editor.putString(Util.KEY_NAME, vehiclecomplaint.getName());
+                            editor.putString(Util.KEY_PHONE, vehiclecomplaint.getPhone());
+                            editor.putString(Util.KEY_EMAIL, vehiclecomplaint.getEmail());
+                            editor.putString(Util.KEY_VEHICLE, vehiclecomplaint.getVehicle());
+                            editor.putString(Util.KEY_VEHICLENUMBER, vehiclecomplaint.getVehiclenumber());
 
                             editor.commit();
 
@@ -226,16 +223,16 @@ public class VehiclecomplaintActivity extends AppCompatActivity implements Compo
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> map = new HashMap<>();
-                Log.i("test",vehicle.toString());
+                Log.i("test",vehiclecomplaint.toString());
                 if(updateMode)
-                    map.put("id",String.valueOf(rcvVehicle.getId()));
+                    map.put("id",String.valueOf(rcvVehiclecomplaint.getId()));
 
-                map.put("name", vehicle.getName());
-                map.put("phone", vehicle.getPhone());
-                map.put("email", vehicle.getEmail());
-                map.put("gender", vehicle.getGender());
-                map.put("vehicle", vehicle.getVehicle());
-                map.put("vehiclenumber", vehicle.getVehiclenumber());
+                map.put("name", vehiclecomplaint.getName());
+                map.put("phone", vehiclecomplaint.getPhone());
+                map.put("email", vehiclecomplaint.getEmail());
+                map.put("gender", vehiclecomplaint.getGender());
+                map.put("vehicle", vehiclecomplaint.getVehicle());
+                map.put("vehiclenumber", vehiclecomplaint.getVehiclenumber());
 
                 return map;
             }
@@ -252,9 +249,9 @@ public class VehiclecomplaintActivity extends AppCompatActivity implements Compo
 
         if(b) {
             if (id == R.id.radioButtonMale) {
-                vehicle.setGender("Male");
+                vehiclecomplaint.setGender("Male");
             } else {
-                vehicle.setGender("Female");
+                vehiclecomplaint.setGender("Female");
             }
         }
     }
@@ -296,35 +293,35 @@ public class VehiclecomplaintActivity extends AppCompatActivity implements Compo
     boolean validateFields(){
         boolean flag = true;
 
-        if(vehicle.getName().isEmpty()){
+        if(vehiclecomplaint.getName().isEmpty()){
             flag = false;
             eTxtName.setError("Please Enter Name");
         }
 
-        if(vehicle.getPhone().isEmpty()){
+        if(vehiclecomplaint.getPhone().isEmpty()){
             flag = false;
             eTxtPhone.setError("Please Enter Phone");
         }else{
-            if(vehicle.getPhone().length()<10){
+            if(vehiclecomplaint.getPhone().length()<10){
                 flag = false;
                 eTxtPhone.setError("Please Enter 10 digits Phone Number");
             }
         }
 
-        if(vehicle.getEmail().isEmpty()){
+        if(vehiclecomplaint.getEmail().isEmpty()){
             flag = false;
             eTxtEmail.setError("Please Enter Email");
         }else{
-            if(!(vehicle.getEmail().contains("@") && vehicle.getEmail().contains("."))){
+            if(!(vehiclecomplaint.getEmail().contains("@") && vehiclecomplaint.getEmail().contains("."))){
                 flag = false;
                 eTxtEmail.setError("Please Enter correct Email");
             }
         }
-        if(vehicle.getVehicle().isEmpty()){
+        if(vehiclecomplaint.getVehicle().isEmpty()){
             flag = false;
             eTxtVehicle.setError("Please Enter correct Vehicle");
         }
-        if(vehicle.getVehiclenumber().isEmpty()){
+        if(vehiclecomplaint.getVehiclenumber().isEmpty()){
             flag = false;
             eTxtVehicleNumber.setError("Please Enter correct VehicleNumber");
         }
