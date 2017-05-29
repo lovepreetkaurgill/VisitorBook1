@@ -2,7 +2,6 @@ package auribises.com.visitorbook.Activites;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -22,7 +21,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -30,15 +28,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONObject;
-
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-
 import auribises.com.visitorbook.Class.RegisterGuard;
-import auribises.com.visitorbook.Class.RegisterTeacher;
 import auribises.com.visitorbook.R;
 import auribises.com.visitorbook.Util;
 import butterknife.ButterKnife;
@@ -394,7 +388,7 @@ public class RegisterGuardActivity extends AppCompatActivity implements Compound
     }
 
 
-    void showDatePicker(View view){
+    public void showDatePicker(View view){
 
         Calendar calendar = Calendar.getInstance();
         int dd = calendar.get(Calendar.DAY_OF_MONTH);

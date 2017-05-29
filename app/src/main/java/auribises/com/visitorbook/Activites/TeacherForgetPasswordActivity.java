@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,10 +18,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import auribises.com.visitorbook.Class.Login;
 import auribises.com.visitorbook.R;
 import auribises.com.visitorbook.Util;
@@ -44,7 +41,6 @@ public class TeacherForgetPasswordActivity extends AppCompatActivity {
     ConnectivityManager connectivityManager;
     NetworkInfo networkInfo;
     ProgressDialog progressDialog;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +79,6 @@ public class TeacherForgetPasswordActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Please correct Input", Toast.LENGTH_LONG).show();
             }
-
-
         }
     }
     void UpdateIntoCloud() {
@@ -93,7 +87,6 @@ public class TeacherForgetPasswordActivity extends AppCompatActivity {
         progressDialog.show();
 
         url = Util.TEACHER_FORGETPASSWORD_PHP;
-
 
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -153,8 +146,5 @@ public class TeacherForgetPasswordActivity extends AppCompatActivity {
         }
 
         return flag;
-
-
     }
-
 }

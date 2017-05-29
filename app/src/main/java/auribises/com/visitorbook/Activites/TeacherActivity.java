@@ -15,15 +15,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -46,8 +43,6 @@ import auribises.com.visitorbook.R;
 import auribises.com.visitorbook.Util;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-
-import static auribises.com.visitorbook.R.id.editTextDate;
 
 public class TeacherActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener{
 
@@ -174,7 +169,7 @@ public class TeacherActivity extends AppCompatActivity implements CompoundButton
 
     public void clickHandler(View view){
         if(view.getId() == R.id.buttonAppointment){
-            //if(updateMode){
+
                 teacher.setName(eTxtName.getText().toString().trim());
                 teacher.setPhone(eTxtPhone.getText().toString().trim());
                 teacher.setEmail(eTxtEmail.getText().toString().trim());
@@ -183,23 +178,11 @@ public class TeacherActivity extends AppCompatActivity implements CompoundButton
                 teacher.setDate(eTxtDate.getText().toString().trim());
                 teacher.setTime(eTxtTime.getText().toString().trim());
                 teacher.setRoom(eTxtRoom.getText().toString().trim());
-            //}
-//            if(updateMode){
-//               Intent data=new Intent();
-//               data.putExtra(Util.keyresult,teacher);
-//               setResult(Util.UPREQCODE,data);
-//               finish();
-//            }
-
-
-
-            //insertIntoDB();
 
             if(validateFields()) {
                 if (isNetworkConected())
                     insertIntoCloud();
-//                Intent i = new Intent(TeacherActivity.this, TeacherActivity.class);
-//                startActivity(i);
+
             }else
                     Toast.makeText(this, "Please connect to Internet", Toast.LENGTH_LONG).show();
             }else {
@@ -233,9 +216,6 @@ public class TeacherActivity extends AppCompatActivity implements CompoundButton
                         Toast.makeText(TeacherActivity.this,message,Toast.LENGTH_LONG).show();
 
                         if(updateMode){
-//                            Intent data=new Intent();
-//                            data.putExtra(Util.keyresult,teacher);
-//                            setResult(Util.UPREQCODE,data);
                             finish();
                         }
 
@@ -397,7 +377,7 @@ public class TeacherActivity extends AppCompatActivity implements CompoundButton
 
     }
 
-    void showDatePicker(View view){
+    public void showDatePicker(View view){
 
         Calendar calendar = Calendar.getInstance();
         int dd = calendar.get(Calendar.DAY_OF_MONTH);
@@ -409,7 +389,7 @@ public class TeacherActivity extends AppCompatActivity implements CompoundButton
 
     }
 
-    void showTimePicker(View view){
+    public void showTimePicker(View view){
         Calendar calendar = Calendar.getInstance();
         int hh = calendar.get(Calendar.HOUR_OF_DAY);
         int mm = calendar.get(Calendar.MINUTE);

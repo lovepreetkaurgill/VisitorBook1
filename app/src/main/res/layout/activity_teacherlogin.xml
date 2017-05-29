@@ -70,7 +70,7 @@
                     android:ems="10"
                     android:textColor="@color/colorPrimary"
                     android:layout_gravity="center"
-                    android:inputType="textPersonName"
+                    android:inputType="textEmailAddress"
                     android:hint="Enter Username" />
             </LinearLayout>
 

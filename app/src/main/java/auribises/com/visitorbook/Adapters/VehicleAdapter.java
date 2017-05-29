@@ -13,7 +13,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import auribises.com.visitorbook.Class.Vehicle;
-import auribises.com.visitorbook.Class.Vehiclecomplaint;
 import auribises.com.visitorbook.R;
 
 

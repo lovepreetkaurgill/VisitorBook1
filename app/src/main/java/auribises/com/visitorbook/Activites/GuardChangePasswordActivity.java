@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import auribises.com.visitorbook.Class.Login;
+import auribises.com.visitorbook.Class.RegisterGuard;
 import auribises.com.visitorbook.R;
 import auribises.com.visitorbook.Util;
 import butterknife.ButterKnife;
@@ -44,7 +45,7 @@ public class GuardChangePasswordActivity extends AppCompatActivity {
 
     RequestQueue requestQueue;
 
-    Login login;
+    RegisterGuard registerguard;
 
     ConnectivityManager connectivityManager;
     NetworkInfo networkInfo;
@@ -62,7 +63,7 @@ public class GuardChangePasswordActivity extends AppCompatActivity {
         progressDialog.setMessage("Please Wait..");
         progressDialog.setCancelable(false);
 
-        login = new Login();
+        registerguard = new RegisterGuard();
 
         btnSubmit.setText("Submit");
     }
@@ -79,10 +80,10 @@ public class GuardChangePasswordActivity extends AppCompatActivity {
 
     public void OnChangePassword(View view) {
         if (view.getId() == R.id.buttonSubmit) {
-            login.setUsername(TxtNewUsername.getText().toString().trim());
-            login.setPassword(TxtNewPassword.getText().toString().trim());
+            registerguard.setEmail(TxtNewUsername.getText().toString().trim());
+            registerguard.setPassword(TxtNewPassword.getText().toString().trim());
 
-            Intent i = new Intent(GuardChangePasswordActivity.this, GuardloginActivity.class);
+            Intent i = new Intent(GuardChangePasswordActivity.this, GuardChangePasswordActivity.class);
             startActivity(i);
 
             if (validateFields()) {
@@ -118,7 +119,7 @@ public class GuardChangePasswordActivity extends AppCompatActivity {
                     String message = jsonObject.getString("message");
 
                     if (success == 1) {
-                        Toast.makeText(GuardChangePasswordActivity.this, message, Toast.LENGTH_LONG).show();
+                        Toast.makeText(GuardChangePasswordActivity.this, message, Toast.LENGTH_SHORT).show();
 
                     } else {
                         Toast.makeText(GuardChangePasswordActivity.this, message, Toast.LENGTH_LONG).show();
@@ -142,9 +143,9 @@ public class GuardChangePasswordActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<>();
-                map.put("username", login.getUsername());
-                map.put("password", login.getPassword());
-                Log.i("test", login.toString());
+                map.put("email", registerguard.getEmail());
+                map.put("password", registerguard.getPassword());
+                Log.i("test", registerguard.toString());
                 return map;
 
             }
@@ -160,12 +161,12 @@ public class GuardChangePasswordActivity extends AppCompatActivity {
 
     Boolean validateFields() {
         boolean flag = true;
-        if (login.getUsername().isEmpty()) {
+        if (registerguard.getEmail().isEmpty()) {
             flag = false;
             TxtNewUsername.setError("Please Enter Username");
         }
 
-        if (login.getPassword().isEmpty()) {
+        if (registerguard.getPassword().isEmpty()) {
             flag = false;
             TxtNewPassword.setError("Please Enter Password");
         }

@@ -7,7 +7,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/icon"
+        android:icon="@drawable/visitorbook"
         android:label="@string/app_name"
 
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -56,11 +56,11 @@
         <activity android:name=".Activites.TeacherForgetPasswordActivity" />
         <activity android:name=".Activites.GuardChangePasswordActivity" />
         <activity android:name=".Activites.TeacherChangePasswordActivity" />
+        <activity android:name=".Activites.AdminForgetPasswordActivity" />
         <activity android:name=".Activites.GuardForgetPasswordActivity" />
         <activity android:name=".Activites.AdminChangePasswordActivity" />
         <activity android:name=".Activites.TeacherhomeActivity" />
-        <activity android:name=".Activites.VehiclecomplaintActivity" />
-        <activity android:name=".Activites.AllVehiclecomplaintActivity"></activity>
+        <activity android:name=".Activites.ProfileActivity"/>
     </application>
 
 </manifest>

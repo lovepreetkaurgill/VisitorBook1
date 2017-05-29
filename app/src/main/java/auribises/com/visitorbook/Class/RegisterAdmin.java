@@ -96,9 +96,7 @@ public class RegisterAdmin implements Serializable{
         this.experience = experience;
     }
 
-    public String getPassword() {
-        return password;
-    }
+    public String getPassword() { return password; }
 
     public void setPassword(String password) {
         this.password = password;
@@ -106,7 +104,7 @@ public class RegisterAdmin implements Serializable{
 
     @Override
     public String toString() {
-        return "Details of RegisterAdmin\n" +
+        return "Details of Admin\n" +
                 "\nID is: " + id +
                 "\nName is: " + name +
                 "\nPhone is: " + phone +

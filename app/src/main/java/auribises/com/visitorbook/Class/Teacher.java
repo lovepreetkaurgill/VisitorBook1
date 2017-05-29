@@ -105,7 +105,7 @@ public class Teacher implements Serializable {
 
     @Override
     public String toString() {
-        return "Details of Teacher\n" +
+        return "Details of Visitors\n" +
                 "\nID is: " + id +
                 "\nName is: " + name +
                 "\nPhone is: " + phone +

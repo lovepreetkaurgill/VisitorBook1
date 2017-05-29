@@ -1,10 +1,8 @@
 package auribises.com.visitorbook.Activites;
 
 import android.app.ProgressDialog;
-
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +14,6 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -24,14 +21,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import auribises.com.visitorbook.Adapters.VehicleAdapter;
 import auribises.com.visitorbook.Class.Vehicle;
 import auribises.com.visitorbook.R;
@@ -70,8 +64,6 @@ public class AllVehicleActivity extends AppCompatActivity implements AdapterView
         progressDialog.setCancelable(false);
 
         requestQueue = Volley.newRequestQueue(this);
-
-
 
         eTxtSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -119,9 +111,6 @@ public class AllVehicleActivity extends AppCompatActivity implements AdapterView
         Vehicle();
     }
 
-
-
-
     void retrieveFromCloud(){
 
         progressDialog.show();
@@ -153,7 +142,7 @@ public class AllVehicleActivity extends AppCompatActivity implements AdapterView
                         vehicleList.add(new Vehicle(id,n,p,e,g,v,vn));
                     }
 
-                    adapter = new VehicleAdapter(AllVehicleActivity.this,R.layout.vehicle1_list_item, vehicleList);
+                    adapter = new VehicleAdapter(AllVehicleActivity.this,R.layout.vehicle_list_item, vehicleList);
                     listView.setAdapter(adapter);
                     listView.setOnItemClickListener(AllVehicleActivity.this);
 
@@ -165,7 +154,6 @@ public class AllVehicleActivity extends AppCompatActivity implements AdapterView
                     progressDialog.dismiss();
                     Toast.makeText(AllVehicleActivity.this,"Some Exception",Toast.LENGTH_LONG).show();
                 }
-
 
             }
         }, new Response.ErrorListener() {
@@ -179,7 +167,6 @@ public class AllVehicleActivity extends AppCompatActivity implements AdapterView
 
         requestQueue.add(stringRequest); // Execute the Request
     }
-
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -210,10 +197,8 @@ public class AllVehicleActivity extends AppCompatActivity implements AdapterView
                         deleteVehicle();
                         break;
                 }
-
             }
         });
-
 
         builder.create().show();
     }
@@ -286,5 +271,4 @@ public class AllVehicleActivity extends AppCompatActivity implements AdapterView
         requestQueue.add(request);
 
     }
-
 }

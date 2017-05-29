@@ -587,7 +587,7 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
 
     }
 
-    void showDatePicker(View view){
+    public void showDatePicker(View view){
 
         Calendar calendar = Calendar.getInstance();
         int dd = calendar.get(Calendar.DAY_OF_MONTH);
@@ -599,7 +599,7 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
 
     }
 
-    void showTimePicker(View view){
+    public void showTimePicker(View view){
         Calendar calendar = Calendar.getInstance();
         int hh = calendar.get(Calendar.HOUR_OF_DAY);
         int mm = calendar.get(Calendar.MINUTE);

@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import auribises.com.visitorbook.Class.Login;
+import auribises.com.visitorbook.Class.RegisterAdmin;
 import auribises.com.visitorbook.R;
 import auribises.com.visitorbook.Util;
 import butterknife.ButterKnife;
@@ -44,7 +45,7 @@ public class AdminChangePasswordActivity extends AppCompatActivity {
 
     RequestQueue requestQueue;
 
-    Login login;
+    RegisterAdmin registeradmin;
 
     ConnectivityManager connectivityManager;
     NetworkInfo networkInfo;
@@ -62,7 +63,7 @@ public class AdminChangePasswordActivity extends AppCompatActivity {
         progressDialog.setMessage("Please Wait..");
         progressDialog.setCancelable(false);
 
-        login = new Login();
+        registeradmin = new RegisterAdmin();
 
         btnSubmit.setText("Submit");
     }
@@ -77,13 +78,14 @@ public class AdminChangePasswordActivity extends AppCompatActivity {
 
     }
 
-    public void OnChangePassword(View view) {
+    public void OnChangeAdmin(View view) {
         if (view.getId() == R.id.buttonSubmit) {
-            login.setUsername(TxtNewUsername.getText().toString().trim());
-            login.setPassword(TxtNewPassword.getText().toString().trim());
+            registeradmin.setEmail(TxtNewUsername.getText().toString().trim());
+            registeradmin.setPassword(TxtNewPassword.getText().toString().trim());
 
-            Intent i = new Intent(AdminChangePasswordActivity.this, AdminloginActivity.class);
-            startActivity(i);
+//            Intent i = new Intent(AdminChangePasswordActivity.this, AdminloginActivity.class);
+//            startActivity(i);
+//            finish();
 
             if (validateFields()) {
                 if (isNetworkConected())
@@ -118,7 +120,7 @@ public class AdminChangePasswordActivity extends AppCompatActivity {
                     String message = jsonObject.getString("message");
 
                     if (success == 1) {
-                        Toast.makeText(AdminChangePasswordActivity.this, message, Toast.LENGTH_LONG).show();
+                        Toast.makeText(AdminChangePasswordActivity.this, message, Toast.LENGTH_SHORT).show();
 
                     } else {
                         Toast.makeText(AdminChangePasswordActivity.this, message, Toast.LENGTH_LONG).show();
@@ -142,9 +144,9 @@ public class AdminChangePasswordActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<>();
-                map.put("username", login.getUsername());
-                map.put("password", login.getPassword());
-                Log.i("test", login.toString());
+                map.put("email", registeradmin.getEmail());
+                map.put("password", registeradmin.getPassword());
+                Log.i("test", registeradmin.toString());
                 return map;
 
             }
@@ -160,12 +162,12 @@ public class AdminChangePasswordActivity extends AppCompatActivity {
 
     Boolean validateFields() {
         boolean flag = true;
-        if (login.getUsername().isEmpty()) {
+        if (registeradmin.getEmail().isEmpty()) {
             flag = false;
             TxtNewUsername.setError("Please Enter Username");
         }
 
-        if (login.getPassword().isEmpty()) {
+        if (registeradmin.getPassword().isEmpty()) {
             flag = false;
             TxtNewPassword.setError("Please Enter Password");
         }

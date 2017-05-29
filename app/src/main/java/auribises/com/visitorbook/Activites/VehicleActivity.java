@@ -1,7 +1,7 @@
 package auribises.com.visitorbook.Activites;
 
 import android.app.ProgressDialog;
-
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,14 +14,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,12 +26,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import auribises.com.visitorbook.Class.Vehicle;
 import auribises.com.visitorbook.R;
 import auribises.com.visitorbook.Util;
@@ -69,6 +63,7 @@ public class VehicleActivity extends AppCompatActivity implements CompoundButton
 
     Vehicle vehicle, rcvVehicle;
 
+    ContentResolver resolver;
 
     boolean updateMode;
 
@@ -101,12 +96,10 @@ public class VehicleActivity extends AppCompatActivity implements CompoundButton
         rbMale.setOnCheckedChangeListener(this);
         rbFemale.setOnCheckedChangeListener(this);
 
-
         requestQueue = Volley.newRequestQueue(this);
 
         Intent rcv = getIntent();
         updateMode = rcv.hasExtra("keyVehicle");
-
 
         if(updateMode){
             rcvVehicle = (Vehicle)rcv.getSerializableExtra("keyVehicle");
@@ -121,7 +114,6 @@ public class VehicleActivity extends AppCompatActivity implements CompoundButton
             }else{
                 rbFemale.setChecked(true);
             }
-
 
             btnSubmit.setText("Update");
         }
@@ -139,7 +131,7 @@ public class VehicleActivity extends AppCompatActivity implements CompoundButton
 
     public void clickHandler(View view){
         if(view.getId() == R.id.buttonSubmit){
-            insertIntoCloud();
+
             vehicle.setName(eTxtName.getText().toString().trim());
             vehicle.setPhone(eTxtPhone.getText().toString().trim());
             vehicle.setEmail(eTxtEmail.getText().toString().trim());
@@ -149,15 +141,12 @@ public class VehicleActivity extends AppCompatActivity implements CompoundButton
             if(validateFields()) {
                 if (isNetworkConected())
                     insertIntoCloud();
-//                Intent i = new Intent(VehicleActivity.this, AllVehicleActivity.class);
-//                startActivity(i);
             } else
                     Toast.makeText(this, "Please connect to Internet", Toast.LENGTH_LONG).show();
             }else {
                 Toast.makeText(this, "Please correct Input", Toast.LENGTH_LONG).show();
             }
         }
-
 
     void insertIntoCloud(){
 
@@ -171,8 +160,6 @@ public class VehicleActivity extends AppCompatActivity implements CompoundButton
 
         progressDialog.show();
 
-
-
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -184,21 +171,6 @@ public class VehicleActivity extends AppCompatActivity implements CompoundButton
 
                     if(success == 1){
                         Toast.makeText(VehicleActivity.this,message,Toast.LENGTH_LONG).show();
-
-                        if(!updateMode){
-
-                            editor.putString(Util.KEY_NAME, vehicle.getName());
-                            editor.putString(Util.KEY_PHONE, vehicle.getPhone());
-                            editor.putString(Util.KEY_EMAIL, vehicle.getEmail());
-                            editor.putString(Util.KEY_VEHICLE, vehicle.getVehicle());
-                            editor.putString(Util.KEY_VEHICLENUMBER, vehicle.getVehiclenumber());
-
-                            editor.commit();
-
-//                            Intent home = new Intent(VehicleActivity.this,VehicleActivity.class);
-//                            startActivity(home);
-//                            finish();
-                        }
 
                         if(updateMode)
                             finish();
@@ -229,13 +201,12 @@ public class VehicleActivity extends AppCompatActivity implements CompoundButton
                 Log.i("test",vehicle.toString());
                 if(updateMode)
                     map.put("id",String.valueOf(rcvVehicle.getId()));
-
-                map.put("name", vehicle.getName());
-                map.put("phone", vehicle.getPhone());
-                map.put("email", vehicle.getEmail());
-                map.put("gender", vehicle.getGender());
-                map.put("vehicle", vehicle.getVehicle());
-                map.put("vehiclenumber", vehicle.getVehiclenumber());
+                map.put("Name", vehicle.getName());
+                map.put("Phone", vehicle.getPhone());
+                map.put("Email", vehicle.getEmail());
+                map.put("Gender", vehicle.getGender());
+                map.put("Vehicle", vehicle.getVehicle());
+                map.put("Vehiclenumber", vehicle.getVehiclenumber());
 
                 return map;
             }
@@ -259,8 +230,33 @@ public class VehicleActivity extends AppCompatActivity implements CompoundButton
         }
     }
 
+    void insertIntoDB(){
 
+        ContentValues values = new ContentValues();
 
+        values.put(Util.COL_NAMEVEHICLE,vehicle.getName());
+        values.put(Util.COL_PHONEVEHICLE,vehicle.getPhone());
+        values.put(Util.COL_EMAILVEHICLE,vehicle.getEmail());
+        values.put(Util.COL_GENDERVEHICLE,vehicle.getGender());
+        values.put(Util.COL_VEHICLEVEHICLE,vehicle.getVehicle());
+        values.put(Util.COL_VEHICLENUMBERVEHICLE,vehicle.getVehiclenumber());
+
+         if(!updateMode){
+            Uri dummy = resolver.insert(Util.VEHICLE_URI,values);
+            Toast.makeText(this,vehicle.getName()+ " Registered Successfully "+dummy.getLastPathSegment(),Toast.LENGTH_LONG).show();
+
+            Log.i("Insert",vehicle.toString());
+
+            clearFields();
+        }else{
+            String where = Util.COL_IDVEHICLE + " = "+rcvVehicle.getId();
+            int i = resolver.update(Util.VEHICLE_URI,values,where,null);
+            if(i>0){
+                Toast.makeText(this,"Updation Successful",Toast.LENGTH_LONG).show();
+                finish();
+            }
+        }
+    }
     void clearFields(){
         eTxtName.setText("");
         eTxtEmail.setText("");
@@ -275,7 +271,6 @@ public class VehicleActivity extends AppCompatActivity implements CompoundButton
     public boolean onCreateOptionsMenu(Menu menu) {
 
         menu.add(0,101,0,"All Vehicles");
-
 
         return super.onCreateOptionsMenu(menu);
     }
@@ -328,7 +323,6 @@ public class VehicleActivity extends AppCompatActivity implements CompoundButton
             flag = false;
             eTxtVehicleNumber.setError("Please Enter correct VehicleNumber");
         }
-
 
         return flag;
 

@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -19,11 +18,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 
-import auribises.com.visitorbook.Class.Login;
+import auribises.com.visitorbook.Class.GuardLogin;
 import auribises.com.visitorbook.R;
 import auribises.com.visitorbook.Util;
 import butterknife.ButterKnife;
@@ -39,12 +37,11 @@ public class GuardForgetPasswordActivity extends AppCompatActivity {
 
     RequestQueue requestQueue;
 
-    Login login;
+    GuardLogin guardlogin;
 
     ConnectivityManager connectivityManager;
     NetworkInfo networkInfo;
     ProgressDialog progressDialog;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +55,7 @@ public class GuardForgetPasswordActivity extends AppCompatActivity {
         progressDialog.setMessage("Please Wait..");
         progressDialog.setCancelable(false);
 
-        login = new Login();
+        guardlogin = new GuardLogin();
     }
 
     boolean isNetworkConected() {
@@ -66,14 +63,13 @@ public class GuardForgetPasswordActivity extends AppCompatActivity {
         connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
         networkInfo = connectivityManager.getActiveNetworkInfo();
 
-
         return (networkInfo != null && networkInfo.isConnected());
 
     }
 
-    public void OnChangePass(View view) {
+    public void OnChangeGuard(View view) {
         if (view.getId() == R.id.buttonSubmitg) {
-            login.setUsername(TxtEmail.getText().toString().trim());
+            guardlogin.setUsername(TxtEmail.getText().toString().trim());
 
             if (validateFields()) {
                 if (isNetworkConected())
@@ -83,8 +79,6 @@ public class GuardForgetPasswordActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Please correct Input", Toast.LENGTH_LONG).show();
             }
-
-
         }
     }
     void UpdateIntoCloud() {
@@ -93,7 +87,6 @@ public class GuardForgetPasswordActivity extends AppCompatActivity {
         progressDialog.show();
 
         url = Util.GUARD_FORGETPASSWORD_PHP;
-
 
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -130,9 +123,9 @@ public class GuardForgetPasswordActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<>();
-                map.put("email", login.getUsername());
+                map.put("email", guardlogin.getUsername());
 
-                Log.i("test", login.toString());
+                Log.i("test", guardlogin.toString());
                 return map;
 
             }
@@ -147,14 +140,11 @@ public class GuardForgetPasswordActivity extends AppCompatActivity {
 
     boolean validateFields() {
         boolean flag = true;
-        if (login.getUsername().isEmpty()) {
+        if (guardlogin.getUsername().isEmpty()) {
             flag = false;
             TxtEmail.setError("Please Enter Username");
         }
 
         return flag;
-
-
     }
-
 }

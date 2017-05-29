@@ -7,7 +7,6 @@ public class RegisterGuard implements Serializable {
      int id;
      String name,phone,email,birthdate,gender,address,qualification,experience,password;
 
-    //Constructors
     public RegisterGuard() {
     }
 
@@ -106,7 +105,7 @@ public class RegisterGuard implements Serializable {
 
     @Override
     public String toString() {
-        return "Details of Teacher\n" +
+        return "Details of Guard\n" +
                 "\nID is: " + id +
                 "\nName is: " + name +
                 "\nPhone is: " + phone +

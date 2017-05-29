@@ -106,7 +106,7 @@ public class RegisterTeacher implements Serializable{
 
     @Override
     public String toString() {
-        return "Details of RegisterTeacher\n" +
+        return "Details of Teacher\n" +
                 "\nID is: " + id +
                 "\nName is: " + name +
                 "\nPhone is: " + phone +

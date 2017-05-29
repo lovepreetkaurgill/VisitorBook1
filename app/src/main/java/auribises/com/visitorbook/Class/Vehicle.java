@@ -2,12 +2,10 @@ package auribises.com.visitorbook.Class;
 
 import java.io.Serializable;
 
-
-
 public class Vehicle implements Serializable {
 
     int id;
-    String name, phone, email, gender, vehicle, vehiclenumber;
+    String name,phone,email,gender,vehicle,vehiclenumber;
 
 
     public Vehicle() {
@@ -83,7 +81,7 @@ public class Vehicle implements Serializable {
 
     @Override
     public String toString() {
-        return "Details of Vehicle\n" +
+        return "Details of Vehicles\n" +
                 "\nID is: " + id +
                 "\nName is: " + name +
                 "\nPhone is: " + phone +

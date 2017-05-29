@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,13 +21,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import auribises.com.visitorbook.Class.Login;
 import auribises.com.visitorbook.R;
 import auribises.com.visitorbook.Util;
@@ -52,10 +48,8 @@ public class TeacherloginActivity extends AppCompatActivity {
     @InjectView(R.id.changepasswordt)
     TextView changepassword;
 
-
     @InjectView(R.id.login)
     TextView txtlogin;
-
 
     ConnectivityManager connectivityManager;
     NetworkInfo networkInfo;
@@ -103,24 +97,22 @@ public class TeacherloginActivity extends AppCompatActivity {
             }
         }else{
                 if(view.getId()==R.id.forgotpasswordt){
-                    Intent i=new Intent(TeacherloginActivity.this,TeacherForgetPasswordActivity.class);
+                    Intent i = new Intent(TeacherloginActivity.this,TeacherForgetPasswordActivity.class);
                     startActivity(i);
-                    finish();
+                    //finish();
                 }else{
-                    Intent i=new Intent(TeacherloginActivity.this,TeacherChangePasswordActivity.class);
+                    Intent i = new Intent(TeacherloginActivity.this,TeacherChangePasswordActivity.class);
                     startActivity(i);
                     //finish();
 
                 }
-            }
         }
-
+    }
 
     void login(){
 
         input_username = editTextname.getText().toString().trim();
         input_password = editTextpass.getText().toString().trim();
-
 
         progressDialog.show();
         StringRequest request=new StringRequest(Request.Method.POST, Util.TEACHERLOGIN_PHP, new Response.Listener<String>() {
@@ -147,7 +139,7 @@ public class TeacherloginActivity extends AppCompatActivity {
                     editor.putBoolean("loggedin", true);
                     editor.putString("username", input_username);
                     editor.commit();
-                    Toast.makeText(getApplicationContext(),"Login Success!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Login Success!",Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(TeacherloginActivity.this, TeacherhomeActivity.class);
                     startActivity(intent);
                     finish();
@@ -183,8 +175,6 @@ public class TeacherloginActivity extends AppCompatActivity {
         editTextname.setText("");
         editTextpass.setText("");
     }
-
-
 
     boolean  validation(){
         boolean flag =true;

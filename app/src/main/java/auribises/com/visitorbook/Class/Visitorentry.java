@@ -149,7 +149,7 @@ public class Visitorentry implements Serializable {
 
     @Override
     public String toString() {
-        return "Details of visitorentry\n" +
+        return "Details of Visitors\n" +
                 "\nID is: " + id +
                 "\nName is: " + name +
                 "\nPhone is: " + phone +

@@ -14,7 +14,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import auribises.com.visitorbook.Activites.AdminappointmentActivity;
 import auribises.com.visitorbook.Activites.AdminhomeActivity;
+import auribises.com.visitorbook.Activites.RegisterAdminActivity;
 import auribises.com.visitorbook.Activites.RegisterGuardActivity;
 import auribises.com.visitorbook.Activites.HomeActivity;
 import auribises.com.visitorbook.Activites.Teacher1Activity;
@@ -22,6 +24,7 @@ import auribises.com.visitorbook.Activites.RegisterTeacherActivity;
 import auribises.com.visitorbook.Activites.Vehicle1Activity;
 import auribises.com.visitorbook.Activites.VehicleActivity;
 import auribises.com.visitorbook.Activites.Visitor1Activity;
+import auribises.com.visitorbook.Class.RegisterAdmin;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,14 +36,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -90,11 +85,19 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_admin) {
-            Intent i= new Intent(MainActivity.this, AdminhomeActivity.class);
+        if (id == R.id.nav_register_admin) {
+            Intent i = new Intent(MainActivity.this, RegisterAdminActivity.class);
             startActivity(i);
-            // Handle the camera action
-        } else if (id == R.id.nav_guard) {
+
+        }else if (id == R.id.nav_register_teacher) {
+        Intent i= new Intent(MainActivity.this, RegisterTeacherActivity.class);
+        startActivity(i);
+
+        } else if (id == R.id.nav_register_guard) {
+         Intent i = new Intent(MainActivity.this, RegisterGuardActivity.class);
+         startActivity(i);
+
+       } else if (id == R.id.nav_guard) {
 
             Intent i= new Intent(MainActivity.this, Visitor1Activity.class);
             startActivity(i);
@@ -107,25 +110,11 @@ public class MainActivity extends AppCompatActivity
             Intent i = new Intent(MainActivity.this, Vehicle1Activity.class);
             startActivity(i);
 
+       }else  if (id == R.id.nav_admin) {
+         Intent i= new Intent(MainActivity.this, AdminappointmentActivity.class);
+         startActivity(i);
 
-        }  else if (id == R.id.nav_vehicleComplaint) {
-            Intent i = new Intent(MainActivity.this, VehicleActivity.class);
-            startActivity(i);
-
-
-
-//        } else if (id == R.id.nav_update_profile) {
-
-        } else if (id == R.id.nav_register_guard) {
-            Intent i= new Intent(MainActivity.this,RegisterGuardActivity.class);
-            startActivity(i);
-
-
-        } else if (id == R.id.nav_register_teacher) {
-            Intent i= new Intent(MainActivity.this, RegisterTeacherActivity.class);
-            startActivity(i);
-
-        } else if (id == R.id.nav_logout) {
+     } else if (id == R.id.nav_logout) {
             Intent i= new Intent(MainActivity.this, HomeActivity.class);
             startActivity(i);
 

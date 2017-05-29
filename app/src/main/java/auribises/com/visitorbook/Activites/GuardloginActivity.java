@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -22,14 +21,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
-
-import auribises.com.visitorbook.Class.Login;
+import auribises.com.visitorbook.Class.GuardLogin;
 import auribises.com.visitorbook.R;
 import auribises.com.visitorbook.Util;
 import butterknife.ButterKnife;
@@ -52,10 +48,8 @@ public class GuardloginActivity extends AppCompatActivity {
     @InjectView(R.id.changepasswordg)
     TextView cp;
 
-
     @InjectView(R.id.login)
     TextView txtlogin;
-
 
     ConnectivityManager connectivityManager;
     NetworkInfo networkInfo;
@@ -66,7 +60,7 @@ public class GuardloginActivity extends AppCompatActivity {
     JSONObject jsonObjectLog;
     RequestQueue requestQueue;
     ProgressDialog progressDialog;
-    Login login;
+    GuardLogin guardlogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +72,7 @@ public class GuardloginActivity extends AppCompatActivity {
         progressDialog.setMessage("Please Wait..");
         progressDialog.setCancelable(false);
 
-        login = new Login();
+        guardlogin = new GuardLogin();
         requestQueue = Volley.newRequestQueue(this);
     }
 
@@ -91,8 +85,8 @@ public class GuardloginActivity extends AppCompatActivity {
 
     public void onClickGuard(View view){
         if(view.getId()==R.id.button){
-            login.setUsername(editTextname.getText().toString().trim());
-            login.setPassword(editTextpass.getText().toString().trim());
+            guardlogin.setUsername(editTextname.getText().toString().trim());
+            guardlogin.setPassword(editTextpass.getText().toString().trim());
             if(validation()) {
                 if (isNetworkConnected()) {
                     login();
@@ -103,11 +97,11 @@ public class GuardloginActivity extends AppCompatActivity {
             }
         }else{
             if(view.getId()==R.id.forgotpasswordg){
-                Intent i=new Intent(GuardloginActivity.this,TeacherForgetPasswordActivity.class);
+                Intent i = new Intent(GuardloginActivity.this,GuardForgetPasswordActivity.class);
                 startActivity(i);
-                finish();
+                //finish();
             }else{
-                Intent i=new Intent(GuardloginActivity.this,TeacherChangePasswordActivity.class);
+                Intent i = new Intent(GuardloginActivity.this,GuardChangePasswordActivity.class);
                 startActivity(i);
                 //finish();
 
@@ -115,27 +109,26 @@ public class GuardloginActivity extends AppCompatActivity {
         }
     }
 
-
-
     void login(){
 
         input_username = editTextname.getText().toString().trim();
         input_password = editTextpass.getText().toString().trim();
 
-
         progressDialog.show();
-        StringRequest request=new StringRequest(Request.Method.POST, Util.LOGINGUARD_PHP, new Response.Listener<String>() {
+        StringRequest request=new StringRequest(Request.Method.POST, Util.GUARDLOGIN_PHP, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 progressDialog.dismiss();
                 int i = 0;
                 try {
+                    Log.i("test",response.toString());
                     JSONObject jsonObject = new JSONObject(response);
                     i = jsonObject.getInt("success");
                     jsonObjectLog = new JSONObject(response);
                     jsonArray = jsonObjectLog.getJSONArray("user");
 
                 }catch (Exception e){
+                    Log.i("test",e.toString());
                     e.printStackTrace();
                 }
 
@@ -157,6 +150,7 @@ public class GuardloginActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Log.i("test",error.toString());
                 progressDialog.dismiss();
                 Toast.makeText(GuardloginActivity.this,"Error: "+error.getMessage(),Toast.LENGTH_LONG).show();
             }
@@ -180,16 +174,15 @@ public class GuardloginActivity extends AppCompatActivity {
     void clearFields(){
         editTextname.setText("");
         editTextpass.setText("");
-
     }
 
     boolean  validation(){
         boolean flag =true;
-        if(login.getUsername().isEmpty()){
+        if(guardlogin.getUsername().isEmpty()){
             flag=false;
             editTextname.setError("Please Enter Username");
         }
-        if(login.getPassword().isEmpty()  ){
+        if(guardlogin.getPassword().isEmpty()  ){
             flag=false;
             editTextpass.setError("Please Enter Password");
         }

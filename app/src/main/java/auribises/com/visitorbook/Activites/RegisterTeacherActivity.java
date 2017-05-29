@@ -245,7 +245,7 @@ public class RegisterTeacherActivity extends AppCompatActivity implements Compou
                 map.put("address", registerteacher.getAddress());
                 map.put("qualification", registerteacher.getQualification());
                 map.put("experience", registerteacher.getExperience());
-                map.put("Password", registerteacher.getPassword());
+                map.put("password", registerteacher.getPassword());
                 return map;
             }
         };
@@ -392,8 +392,7 @@ public class RegisterTeacherActivity extends AppCompatActivity implements Compou
 
     }
 
-
-    void showDatePicker(View view){
+    public void showDatePicker(View view){
 
         Calendar calendar = Calendar.getInstance();
         int dd = calendar.get(Calendar.DAY_OF_MONTH);

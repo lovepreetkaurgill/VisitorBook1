@@ -24,8 +24,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import auribises.com.visitorbook.Class.Login;
+import auribises.com.visitorbook.Class.RegisterTeacher;
 import auribises.com.visitorbook.R;
 import auribises.com.visitorbook.Util;
 import butterknife.ButterKnife;
@@ -44,7 +43,7 @@ public class TeacherChangePasswordActivity extends AppCompatActivity {
 
     RequestQueue requestQueue;
 
-    Login login;
+    RegisterTeacher registerteacher;
 
     ConnectivityManager connectivityManager;
     NetworkInfo networkInfo;
@@ -62,7 +61,7 @@ public class TeacherChangePasswordActivity extends AppCompatActivity {
         progressDialog.setMessage("Please Wait..");
         progressDialog.setCancelable(false);
 
-        login = new Login();
+        registerteacher = new RegisterTeacher();
 
         btnSubmit.setText("Submit");
     }
@@ -79,10 +78,10 @@ public class TeacherChangePasswordActivity extends AppCompatActivity {
 
     public void OnChangePassword(View view) {
         if (view.getId() == R.id.buttonSubmit) {
-            login.setUsername(TxtUsername.getText().toString().trim());
-            login.setPassword(TxtNewPassword.getText().toString().trim());
+            registerteacher.setEmail(TxtUsername.getText().toString().trim());
+            registerteacher.setPassword(TxtNewPassword.getText().toString().trim());
 
-            Intent i = new Intent(TeacherChangePasswordActivity.this, TeacherloginActivity.class);
+            Intent i = new Intent(TeacherChangePasswordActivity.this, TeacherChangePasswordActivity.class);
             startActivity(i);
 
             if (validateFields()) {
@@ -118,7 +117,7 @@ public class TeacherChangePasswordActivity extends AppCompatActivity {
                     String message = jsonObject.getString("message");
 
                     if (success == 1) {
-                        Toast.makeText(TeacherChangePasswordActivity.this, message, Toast.LENGTH_LONG).show();
+                        Toast.makeText(TeacherChangePasswordActivity.this, message, Toast.LENGTH_SHORT).show();
 
                     } else {
                         Toast.makeText(TeacherChangePasswordActivity.this, message, Toast.LENGTH_LONG).show();
@@ -142,9 +141,9 @@ public class TeacherChangePasswordActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<>();
-                map.put("email", login.getUsername());
-//                map.put("password", login.getPassword());
-                Log.i("test", login.toString());
+                map.put("email", registerteacher.getEmail());
+                map.put("password", registerteacher.getPassword());
+                Log.i("test", registerteacher.toString());
                 return map;
 
             }
@@ -160,12 +159,12 @@ public class TeacherChangePasswordActivity extends AppCompatActivity {
 
     Boolean validateFields() {
         boolean flag = true;
-        if (login.getUsername().isEmpty()) {
+        if (registerteacher.getEmail().isEmpty()) {
             flag = false;
             TxtUsername.setError("Please Enter Username");
         }
 
-        if (login.getPassword().isEmpty()) {
+        if (registerteacher.getPassword().isEmpty()) {
             flag = false;
             TxtNewPassword.setError("Please Enter Password");
         }

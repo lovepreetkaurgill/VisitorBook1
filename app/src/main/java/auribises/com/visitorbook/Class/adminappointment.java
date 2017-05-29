@@ -98,7 +98,7 @@ public class adminappointment implements Serializable{
 
     @Override
     public String toString() {
-        return "Details of adminappointment\n" +
+        return "Details of Visitors\n" +
                 "\nID is: " + id +
                 "\nName is: " + name +
                 "\nPhone is: " + phone +

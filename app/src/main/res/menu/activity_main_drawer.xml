@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
-
         <item
-            android:id="@+id/nav_register_guard"
-            android:icon="@drawable/guardregister"
-            android:title="Register_Guard" />
+            android:id="@+id/nav_register_admin"
+            android:icon="@drawable/admin"
+            android:title="Register_Admin" />
+
         <item
             android:id="@+id/nav_register_teacher"
             android:icon="@drawable/teacherregister"
             android:title="Register_Teacher" />
+        <item
+            android:id="@+id/nav_register_guard"
+            android:icon="@drawable/guardregister"
+            android:title="Register_Guard" />
         <item
             android:id="@+id/nav_teacher"
             android:icon="@drawable/teacher"
@@ -21,15 +25,11 @@
         <item
             android:id="@+id/nav_vehicle"
             android:icon="@drawable/vehicle"
-            android:title="Vehicle_Visitors" />
+            android:title="Guard_Vehicleentry" />
         <item
             android:id="@+id/nav_admin"
             android:icon="@drawable/appointment"
             android:title="Admin_Appointment " />
-        <item
-            android:id="@+id/nav_vehicleComplaint"
-            android:icon="@drawable/vehicle"
-            android:title="Vehicle_Complaint" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@drawable/logout"
