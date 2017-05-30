@@ -338,11 +338,22 @@ public class TeacherActivity extends AppCompatActivity implements CompoundButton
         int id = item.getItemId();
 
         if(id == 101){
+            Log.i("test","---0");
             Intent i = new Intent(TeacherActivity.this,AllTeachersActivity.class);
-            startActivity(i);
+            startActivityForResult(i,301);
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.i("test","----2");
+        if(requestCode==301&&resultCode==302){
+            Log.i("test","----1");
+            finish();
+        }
     }
 
     boolean validateFields(){

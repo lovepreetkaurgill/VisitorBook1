@@ -104,20 +104,26 @@ public class AllTeachersActivity extends AppCompatActivity implements AdapterVie
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Logout ");
         builder.setMessage("Do you wish to Logout?");
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Finish", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
-                Intent j= new Intent(AllTeachersActivity.this, HomeActivity.class);
+                /*Intent j = new Intent(AllAdminentryActivity.this, HomeActivity.class);
                 startActivity(j);
-                retrieveFromCloud();
-
+                finish();*/
+                //retrieveFromCloud();
+                Intent intent = new Intent();
+                intent.putExtra("exitSignal",1);
+                setResult(302,intent);
+                finish();
+                Log.i("test","----1");
             }
 
         });
         builder.setNegativeButton("Cancel", null);
         builder.create().show();
     }
+
 
     @Override
     public void onBackPressed() {

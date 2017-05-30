@@ -9,7 +9,6 @@
         android:allowBackup="true"
         android:icon="@drawable/visitorbook"
         android:label="@string/app_name"
-
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -27,6 +26,8 @@
         <activity android:name=".Activites.AllTeachersActivity" />
         <activity android:name=".Activites.TeacherActivity" />
         <activity android:name=".Activites.VisitorEntryActivity" />
+        <activity android:name=".Activites.AdminEntryActivity" />
+        <activity android:name=".Activites.AllAdminentryActivity" />
         <activity android:name=".Activites.AllVisitorentryActivity" />
         <activity android:name=".Activites.TeacherloginActivity" />
         <activity android:name=".Activites.GuardActivity" />
@@ -48,10 +49,10 @@
         <!-- <activity android:name=".Activites.AllGuardRegisterActivity" /> -->
         <activity android:name=".Activites.RegisterGuardActivity" />
         <activity android:name=".Activites.AllGuardRegisterActivity" />
+        <activity android:name=".Activites.AllAdminRegisterActivity" />
         <activity android:name=".Activites.RegisterTeacherActivity" />
         <activity android:name=".Activites.AllTeacherRegisterActivity" />
         <activity android:name=".Activites.RegisterAdminActivity" />
-        <activity android:name=".Activites.AdminhomeActivity" />
         <activity android:name=".Activites.HomeActivity" />
         <activity android:name=".Activites.TeacherForgetPasswordActivity" />
         <activity android:name=".Activites.GuardChangePasswordActivity" />
@@ -60,7 +61,7 @@
         <activity android:name=".Activites.GuardForgetPasswordActivity" />
         <activity android:name=".Activites.AdminChangePasswordActivity" />
         <activity android:name=".Activites.TeacherhomeActivity" />
-        <activity android:name=".Activites.ProfileActivity"/>
+        <activity android:name=".Activites.Admin1Activity"></activity>
     </application>
 
 </manifest>

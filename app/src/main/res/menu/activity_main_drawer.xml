@@ -27,6 +27,10 @@
             android:icon="@drawable/vehicle"
             android:title="Guard_Vehicleentry" />
         <item
+            android:id="@+id/nav_admin1"
+            android:icon="@drawable/admin"
+            android:title="Admin_Visitorentry " />
+        <item
             android:id="@+id/nav_admin"
             android:icon="@drawable/appointment"
             android:title="Admin_Appointment " />

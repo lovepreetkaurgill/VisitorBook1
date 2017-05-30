@@ -1,6 +1,7 @@
 package auribises.com.visitorbook.Activites;
 
 import android.app.ProgressDialog;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -21,19 +23,25 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import auribises.com.visitorbook.Adapters.VehicleAdapter;
-import auribises.com.visitorbook.Class.Vehicle;
+
+
+import auribises.com.visitorbook.Adapters.AdminRegisterAdapter;
+import auribises.com.visitorbook.Adapters.GuardRegisterAdapter;
+import auribises.com.visitorbook.Class.RegisterAdmin;
+import auribises.com.visitorbook.Class.RegisterGuard;
 import auribises.com.visitorbook.R;
 import auribises.com.visitorbook.Util;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class AllVehicleActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
+public class AllAdminRegisterActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
     @InjectView(R.id.listView)
     ListView listView;
@@ -41,11 +49,11 @@ public class AllVehicleActivity extends AppCompatActivity implements AdapterView
     @InjectView(R.id.editTextSearch)
     EditText eTxtSearch;
 
-    ArrayList<Vehicle> vehicleList;
+    ArrayList<RegisterAdmin> registeradminList;
 
-    VehicleAdapter adapter;
+    AdminRegisterAdapter adapter;
 
-    Vehicle vehicle;
+    RegisterAdmin registeradmin;
     int pos;
 
     RequestQueue requestQueue;
@@ -55,7 +63,7 @@ public class AllVehicleActivity extends AppCompatActivity implements AdapterView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_vehicle);
+        setContentView(R.layout.activity_all_admin_register);
 
         ButterKnife.inject(this);
 
@@ -64,6 +72,8 @@ public class AllVehicleActivity extends AppCompatActivity implements AdapterView
         progressDialog.setCancelable(false);
 
         requestQueue = Volley.newRequestQueue(this);
+
+
 
         eTxtSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -87,47 +97,24 @@ public class AllVehicleActivity extends AppCompatActivity implements AdapterView
 
         retrieveFromCloud();
     }
-    void Vehicle() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Logout ");
-        builder.setMessage("Do you wish to Logout?");
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-                Intent j= new Intent(AllVehicleActivity.this, HomeActivity.class);
-                startActivity(j);
-                retrieveFromCloud();
-
-            }
-
-        });
-        builder.setNegativeButton("Cancel", null);
-        builder.create().show();
-    }
-
-    @Override
-    public void onBackPressed() {
-        Vehicle();
-    }
 
     void retrieveFromCloud(){
 
         progressDialog.show();
 
-        vehicleList = new ArrayList<>();
+        registeradminList = new ArrayList<>();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Util.RETRIEVE_VEHICLE_PHP, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Util.RETRIEVE_REGISTERADMIN_PHP, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
                 try {
                     Log.i("test",response.toString());
                     JSONObject jsonObject = new JSONObject(response);
-                    JSONArray jsonArray = jsonObject.getJSONArray("vehicle");
+                    JSONArray jsonArray = jsonObject.getJSONArray("registeradmin");
 
                     int id=0;
-                    String n="",p="",e="",g="",v="",vn="";
+                    String n="",p="",e="",b="",g="",a="",q="",ex="",pa="";
                     for(int i=0;i<jsonArray.length();i++){
                         JSONObject jObj = jsonArray.getJSONObject(i);
 
@@ -135,16 +122,19 @@ public class AllVehicleActivity extends AppCompatActivity implements AdapterView
                         n = jObj.getString("name");
                         p = jObj.getString("phone");
                         e = jObj.getString("email");
+                        b = jObj.getString("birthdate");
                         g = jObj.getString("gender");
-                        v = jObj.getString("vehicle");
-                        vn = jObj.getString("vehiclenumber");
+                        a = jObj.getString("address");
+                        q = jObj.getString("qualification");
+                        ex = jObj.getString("experience");
+                        pa = jObj.getString("password");
 
-                        vehicleList.add(new Vehicle(id,n,p,e,g,v,vn));
+                        registeradminList.add(new RegisterAdmin(id,n,p,e,b,g,a,q,ex,pa));
                     }
 
-                    adapter = new VehicleAdapter(AllVehicleActivity.this,R.layout.vehicle_list_item, vehicleList);
+                    adapter = new AdminRegisterAdapter(AllAdminRegisterActivity.this,R.layout.adminregister_list_item, registeradminList);
                     listView.setAdapter(adapter);
-                    listView.setOnItemClickListener(AllVehicleActivity.this);
+                    listView.setOnItemClickListener(AllAdminRegisterActivity.this);
 
                     progressDialog.dismiss();
 
@@ -152,8 +142,9 @@ public class AllVehicleActivity extends AppCompatActivity implements AdapterView
                     Log.i("test",e.toString());
                     e.printStackTrace();
                     progressDialog.dismiss();
-                    Toast.makeText(AllVehicleActivity.this,"Some Exception",Toast.LENGTH_LONG).show();
+                    Toast.makeText(AllAdminRegisterActivity.this,"Some Exception",Toast.LENGTH_LONG).show();
                 }
+
 
             }
         }, new Response.ErrorListener() {
@@ -161,17 +152,18 @@ public class AllVehicleActivity extends AppCompatActivity implements AdapterView
             public void onErrorResponse(VolleyError error) {
                 Log.i("test",error.toString());
                 progressDialog.dismiss();
-                Toast.makeText(AllVehicleActivity.this,"Some Error",Toast.LENGTH_LONG).show();
+                Toast.makeText(AllAdminRegisterActivity.this,"Some Error",Toast.LENGTH_LONG).show();
             }
         });
 
         requestQueue.add(stringRequest); // Execute the Request
     }
 
+
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         pos = i;
-        vehicle = vehicleList.get(i);
+        registeradmin = registeradminList.get(i);
         showOptions();
     }
 
@@ -184,36 +176,38 @@ public class AllVehicleActivity extends AppCompatActivity implements AdapterView
 
                 switch (i){
                     case 0:
-                        showVehicle();
+                        showregister_admin();
                         break;
 
                     case 1:
-                        Intent intent = new Intent(AllVehicleActivity.this,VehicleActivity.class);
-                        intent.putExtra("keyVehicle", vehicle);
+                        Intent intent = new Intent(AllAdminRegisterActivity.this,RegisterAdminActivity.class);
+                        intent.putExtra("keyregisteradmin", registeradmin);
                         startActivity(intent);
                         break;
 
                     case 2:
-                        deleteVehicle();
+                        deleteregister_admin();
                         break;
                 }
+
             }
         });
+
 
         builder.create().show();
     }
 
-    void showVehicle(){
+    void showregister_admin(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Details of "+ vehicle.getName());
-        builder.setMessage(vehicle.toString());
+        builder.setTitle("Details of "+ registeradmin.getName());
+        builder.setMessage(registeradmin.toString());
         builder.setPositiveButton("Done",null);
         builder.create().show();
     }
 
-    void deleteVehicle(){
+    void deleteregister_admin(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Delete "+ vehicle.getName());
+        builder.setTitle("Delete "+ registeradmin.getName());
         builder.setMessage("Do you wish to Delete?");
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
@@ -229,7 +223,7 @@ public class AllVehicleActivity extends AppCompatActivity implements AdapterView
 
     void deleteFromCloud(){
         progressDialog.show();
-        StringRequest request = new StringRequest(Request.Method.POST, Util.DELETE_VEHICLE_PHP, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, Util.DELETE_REGISTERADMIN_PHP, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
@@ -239,31 +233,31 @@ public class AllVehicleActivity extends AppCompatActivity implements AdapterView
                     String message = jsonObject.getString("message");
 
                     if(success == 1){
-                        vehicleList.remove(pos);
+                        registeradminList.remove(pos);
                         adapter.notifyDataSetChanged();
-                        Toast.makeText(AllVehicleActivity.this,message,Toast.LENGTH_LONG).show();
+                        Toast.makeText(AllAdminRegisterActivity.this,message,Toast.LENGTH_LONG).show();
                     }else{
-                        Toast.makeText(AllVehicleActivity.this,message,Toast.LENGTH_LONG).show();
+                        Toast.makeText(AllAdminRegisterActivity.this,message,Toast.LENGTH_LONG).show();
                     }
                     progressDialog.dismiss();
                 }catch (Exception e){
                     e.printStackTrace();
                     progressDialog.dismiss();
-                    Toast.makeText(AllVehicleActivity.this,"Some Exception",Toast.LENGTH_LONG).show();
+                    Toast.makeText(AllAdminRegisterActivity.this,"Some Exception",Toast.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                Toast.makeText(AllVehicleActivity.this,"Some Volley Error: "+error.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(AllAdminRegisterActivity.this,"Some Volley Error: "+error.getMessage(),Toast.LENGTH_LONG).show();
             }
         })
         {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> map = new HashMap<>();
-                map.put("id",String.valueOf(vehicle.getId()));
+                map.put("id",String.valueOf(registeradmin.getId()));
                 return map;
             }
         };
@@ -271,4 +265,6 @@ public class AllVehicleActivity extends AppCompatActivity implements AdapterView
         requestQueue.add(request);
 
     }
+
 }
+

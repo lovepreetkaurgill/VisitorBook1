@@ -20,7 +20,7 @@ public class TeacherhomeActivity extends AppCompatActivity {
             startActivity(i);
         }else {
             if (view.getId() == R.id.buttonTeacher_visitors) {
-                Intent i = new Intent(TeacherhomeActivity.this, Teacher1Activity.class);
+                Intent i = new Intent(TeacherhomeActivity.this, Visitor1Activity.class);
                 startActivity(i);
             }
         }}}

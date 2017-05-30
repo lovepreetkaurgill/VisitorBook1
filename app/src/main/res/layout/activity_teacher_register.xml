@@ -132,7 +132,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Register"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/circle"
                 android:textColor="@color/white"
                 android:id="@+id/buttonRegister"
                 android:onClick="clickHandler"

@@ -4,6 +4,8 @@ import android.net.Uri;
 
 public class Util {
     public static final String sharedPreferences="prefs";
+    public static final String loginSignal="loginSignal";
+
     // 1. Information for Vehicle Database
     public static final int DB_VERSIONVEHICLE = 1;
     public static final String DB_NAMEVEHICLE = "Vehicle.db";
@@ -100,26 +102,26 @@ public class Util {
     public static final String TEACHERLOGIN_PHP = "http://tajinderj.esy.es/Teacherlogin/teacherlogin.php";
 
     // 4. Information for Visitorentry Database
-    public static final int DB_VERSIONVISITOR = 1;
-    public static final String DB_NAMEVISITOR = "visitorentry.db";
+    public static final int DB_VERSIONVISITOR1 = 1;
+    public static final String DB_NAMEVISITOR1 = "visitorentry.db";
 
     // Information for visitorentry Table
-    public static final String TAB_NAMEVISITOR = "visitorentry";
-    public static final String COL_IDVISITOR = "_ID";
-    public static final String COL_NAMEVISITOR = "NAME";
-    public static final String COL_PHONEVISITOR = "PHONE";
-    public static final String COL_EMAILVISITOR = "EMAIL";
-    public static final String COL_GENDERVISITOR = "GENDER";
-    public static final String COL_ADDRESSVISITOR = "ADDRESS";
-    public static final String COL_PURPOSEVISITOR = "PURPOSE";
-    public static final String COL_DATEVISITOR = "DATE";
-    public static final String COL_TIMEVISITOR = "TIME";
-    public static final String COL_TEACHERVISITOR = "TEACHER";
-    public static final String COL_BRANCHVISITOR = "BRANCH";
-    public static final String COL_IDPROOFVISITOR = "IDPROOF";
-    public static final String COL_IDPROOFNUBERVISITOR = "IDPROOFNUMBER";
-    public static final String COL_VEHICLEVISITOR = "VEHICLE";
-    public static final String COL_VEHICLENUMBERVISITOR = "VEHICLENUMBER";
+      public static final String TAB_NAMEVISITOR1 = "visitorentry";
+//    public static final String COL_IDVISITOR = "_ID";
+//    public static final String COL_NAMEVISITOR = "NAME";
+//    public static final String COL_PHONEVISITOR = "PHONE";
+//    public static final String COL_EMAILVISITOR = "EMAIL";
+//    public static final String COL_GENDERVISITOR = "GENDER";
+//    public static final String COL_ADDRESSVISITOR = "ADDRESS";
+//    public static final String COL_PURPOSEVISITOR = "PURPOSE";
+//    public static final String COL_DATEVISITOR = "DATE";
+//    public static final String COL_TIMEVISITOR = "TIME";
+      public static final String COL_TEACHERVISITOR = "TEACHER";
+      public static final String COL_BRANCHVISITOR = "BRANCH";
+//    public static final String COL_IDPROOFVISITOR = "IDPROOF";
+//    public static final String COL_IDPROOFNUBERVISITOR = "IDPROOFNUMBER";
+//    public static final String COL_VEHICLEVISITOR = "VEHICLE";
+//    public static final String COL_VEHICLENUMBERVISITOR = "VEHICLENUMBER";
 
     public static final String CREATE_TAB_QUERYVISITORENTRY = "create table visitorentry(" +
             "_ID integer primary key autoincrement," +
@@ -139,6 +141,71 @@ public class Util {
             "VEHICLENUMBER varchar(256)" +
             ")";
 
+//    public static final String PREFS_NAME = "visitorbook";
+//    public static final String KEY_NAME = "keyName";
+//    public static final String KEY_PHONE = "keyPhone";
+//    public static final String KEY_EMAIL = "keyEmail";
+//    public static final String KEY_GENDER = "keyGender";
+//    public static final String KEY_ADDRESS = "keyAddress";
+//    public static final String KEY_PURPOSE = "keyPurpose";
+//    public static final String KEY_DATE = "keyDate";
+//    public static final String KEY_TIME = "keyTime";
+      public static final String KEY_TEACHER = "keyTeacher";
+      public static final String KEY_BRANCH = "keyBranch";
+//    public static final String KEY_IDPROOF = "keyIDProof";
+//    public static final String KEY_IDPROOFNUMBER = "keyIDProofNumber";
+//    public static final String KEY_VEHICLE = "keyVehicle";
+//    public static final String KEY_VEHICLENUMBER = "keyVehicleNumber";
+
+    // URI
+    public static final Uri VISITORENTRY_URI = Uri.parse("content://auribises.com.auribises.visitorentry.visitorentryprovider/"+TAB_NAMEVISITOR1);
+
+    final static String URI = "http://tajinderj.esy.es/visitorentry/";
+
+    // URL
+    public static final String INSERT_VISITORENTRY_PHP = "http://tajinderj.esy.es/visitorentry/insert.php";
+    public static final String RETRIEVE_VISITORENTRY_PHP = "http://tajinderj.esy.es/visitorentry/retrieve.php";
+    public static final String DELETE_VISITORENTRY_PHP = "http://tajinderj.esy.es/visitorentry/delete.php";
+    public static final String UPDATE_VISITORENTRY_PHP = "http://tajinderj.esy.es/visitorentry/update.php";
+
+    // 5. Information for Adminentry Database
+    public static final int DB_VERSIONVISITOR = 1;
+    public static final String DB_NAMEVISITOR = "adminentry.db";
+
+    // Information for visitorentry Table
+    public static final String TAB_NAMEVISITOR = "adminentry";
+    public static final String COL_IDVISITOR = "_ID";
+    public static final String COL_NAMEVISITOR = "NAME";
+    public static final String COL_PHONEVISITOR = "PHONE";
+    public static final String COL_EMAILVISITOR = "EMAIL";
+    public static final String COL_GENDERVISITOR = "GENDER";
+    public static final String COL_ADDRESSVISITOR = "ADDRESS";
+    public static final String COL_PURPOSEVISITOR = "PURPOSE";
+    public static final String COL_DATEVISITOR = "DATE";
+    public static final String COL_TIMEVISITOR = "TIME";
+    public static final String COL_ADMINVISITOR = "ADMIN";
+    public static final String COL_IDPROOFVISITOR = "IDPROOF";
+    public static final String COL_IDPROOFNUBERVISITOR = "IDPROOFNUMBER";
+    public static final String COL_VEHICLEVISITOR = "VEHICLE";
+    public static final String COL_VEHICLENUMBERVISITOR = "VEHICLENUMBER";
+
+    public static final String CREATE_TAB_QUERYADMINENTRY = "create table adminentry(" +
+            "_ID integer primary key autoincrement," +
+            "NAME varchar(256)," +
+            "PHONE varchar(256)," +
+            "EMAIL varchar(256)," +
+            "GENDER varchar(256)," +
+            "ADDRESS varchar(256)," +
+            "PURPOSE varchar(256)," +
+            "DATE varchar(256)," +
+            "TIME varchar(256)," +
+            "ADMIN varchar(256)," +
+            "IDPROOF varchar(256)," +
+            "IDPROOFNUMBER varchar(256)," +
+            "VEHICLE varchar(256)," +
+            "VEHICLENUMBER varchar(256)" +
+            ")";
+
     public static final String PREFS_NAME = "visitorbook";
     public static final String KEY_NAME = "keyName";
     public static final String KEY_PHONE = "keyPhone";
@@ -148,25 +215,24 @@ public class Util {
     public static final String KEY_PURPOSE = "keyPurpose";
     public static final String KEY_DATE = "keyDate";
     public static final String KEY_TIME = "keyTime";
-    public static final String KEY_TEACHER = "keyTeacher";
-    public static final String KEY_BRANCH = "keyBranch";
+    public static final String KEY_ADMIN = "keyAdmin";
     public static final String KEY_IDPROOF = "keyIDProof";
     public static final String KEY_IDPROOFNUMBER = "keyIDProofNumber";
     public static final String KEY_VEHICLE = "keyVehicle";
     public static final String KEY_VEHICLENUMBER = "keyVehicleNumber";
 
     // URI
-    public static final Uri VISITORENTRY_URI = Uri.parse("content://auribises.com.auribises.visitorentry.visitorentryprovider/"+TAB_NAMEVISITOR);
+    public static final Uri ADMINENTRY_URI = Uri.parse("content://auribises.com.auribises.adminentry.adminentryprovider/"+TAB_NAMEVISITOR);
 
-    final static String URI1 = "http://tajinderj.esy.es/visitorentry/";
+    final static String URI1 = "http://tajinderj.esy.es/adminentry/";
 
     // URL
-    public static final String INSERT_VISITORENTRY_PHP = "http://tajinderj.esy.es/visitorentry/insert.php";
-    public static final String RETRIEVE_VISITORENTRY_PHP = "http://tajinderj.esy.es/visitorentry/retrieve.php";
-    public static final String DELETE_VISITORENTRY_PHP = "http://tajinderj.esy.es/visitorentry/delete.php";
-    public static final String UPDATE_VISITORENTRY_PHP = "http://tajinderj.esy.es/visitorentry/update.php";
+    public static final String INSERT_ADMINENTRY_PHP = "http://tajinderj.esy.es/adminentry/insert.php";
+    public static final String RETRIEVE_ADMINENTRY_PHP = "http://tajinderj.esy.es/adminentry/retrieve.php";
+    public static final String DELETE_ADMINENTRY_PHP = "http://tajinderj.esy.es/adminentry/delete.php";
+    public static final String UPDATE_ADMINENTRY_PHP = "http://tajinderj.esy.es/adminentry/update.php";
 
-    // 5. Information for Adminlogin Database
+    // 6. Information for Adminlogin Database
     public static final int DB_VERSIONADMIN = 1;
     public static final String DB_NAMEADMIN = "adminlogin.db";
 
@@ -190,7 +256,7 @@ public class Util {
     // URL
     public static final String ADMINLOGIN_PHP = "http://tajinderj.esy.es/Adminlogin/adminlogin.php";
 
-    // 6. Information for Guardlogin Database
+    // 7. Information for Guardlogin Database
     public static final int DB_VERSIONGUARD = 1;
     public static final String DB_NAMEGUARD = "guardlogin.db";
 
@@ -214,7 +280,7 @@ public class Util {
     // URL
     public static final String GUARDLOGIN_PHP = "http://tajinderj.esy.es/Guardlogin/guardlogin.php";
 
-    // 7. Information for RegisterAdmin Database
+    // 8. Information for RegisterAdmin Database
     public static final int DB_VERSIONREGISTERADMIN = 1;
     public static final String DB_NAMEREGISTERADMIN = "registeradmin.db";
 
@@ -249,8 +315,11 @@ public class Util {
 
     // URL
     public static final String INSERT_REGISTERADMIN_PHP = "http://tajinderj.esy.es/registeradmin/insert.php";
+    public static final String RETRIEVE_REGISTERADMIN_PHP = "http://tajinderj.esy.es/registeradmin/retrieve.php";
+    public static final String DELETE_REGISTERADMIN_PHP = "http://tajinderj.esy.es/registeradmin/delete.php";
+    public static final String UPDATE_REGISTERADMIN_PHP = "http://tajinderj.esy.es/registeradmin/update.php";
 
-    // 8. Information for RegisterGuard Database
+    // 9. Information for RegisterGuard Database
     public static final int DB_VERSIONREGISTERGUARD = 1;
     public static final String DB_NAMEREGISTERGUARD = "registerguard.db";
 
@@ -289,7 +358,7 @@ public class Util {
     public static final String DELETE_REGISTERGUARD_PHP = "http://tajinderj.esy.es/registerguard/delete.php";
     public static final String UPDATE_REGISTERGUARD_PHP = "http://tajinderj.esy.es/registerguard/update.php";
 
-    // 9. Information for RegisterTeacher Database
+    // 10. Information for RegisterTeacher Database
     public static final int DB_VERSIONREGISTERTEACHER = 1;
     public static final String DB_NAMEREGISTERTEACHER = "registerteacher.db";
 
@@ -339,7 +408,7 @@ public class Util {
     public static final String DELETE_REGISTERTEACHER_PHP = "http://tajinderj.esy.es/registerteacher/delete.php";
     public static final String UPDATE_REGISTERTEACHER_PHP = "http://tajinderj.esy.es/registerteacher/update.php";
 
-   // 10. Information for Adminappointment Database
+   // 11. Information for Adminappointment Database
    public static final int DB_VERSIONADMINAPPOINTMENT = 1;
    public static final String DB_NAMEADMINAPPOINTMENT = "adminappointment.db";
 

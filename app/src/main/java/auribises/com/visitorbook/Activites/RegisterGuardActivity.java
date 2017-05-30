@@ -235,8 +235,8 @@ public class RegisterGuardActivity extends AppCompatActivity implements Compound
                 map.put("name", registerguard.getName());
                 map.put("phone", registerguard.getPhone());
                 map.put("email", registerguard.getEmail());
-                map.put("gender", registerguard.getGender());
                 map.put("birthdate", registerguard.getBirthdate());
+                map.put("gender", registerguard.getGender());
                 map.put("address", registerguard.getAddress());
                 map.put("qualification", registerguard.getQualification());
                 map.put("experience", registerguard.getExperience());

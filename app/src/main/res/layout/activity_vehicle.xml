@@ -101,7 +101,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Submit"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/circle"
             android:textColor="@color/white"
             android:id="@+id/buttonSubmit"
             android:onClick="clickHandler"

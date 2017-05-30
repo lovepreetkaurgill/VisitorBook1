@@ -184,6 +184,8 @@ public class RegisterAdminActivity extends AppCompatActivity implements Compound
 
         if(!updateMode){
             url = Util.INSERT_REGISTERADMIN_PHP;
+        }else{
+            url = Util.UPDATE_REGISTERADMIN_PHP;
         }
 
         progressDialog.show();
@@ -233,8 +235,8 @@ public class RegisterAdminActivity extends AppCompatActivity implements Compound
                 map.put("name", registeradmin.getName());
                 map.put("phone", registeradmin.getPhone());
                 map.put("email", registeradmin.getEmail());
-                map.put("gender", registeradmin.getGender());
                 map.put("birthdate", registeradmin.getBirthdate());
+                map.put("gender", registeradmin.getGender());
                 map.put("address", registeradmin.getAddress());
                 map.put("qualification", registeradmin.getQualification());
                 map.put("experience", registeradmin.getExperience());
@@ -310,7 +312,7 @@ public class RegisterAdminActivity extends AppCompatActivity implements Compound
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        menu.add(0,101,0,"All Guards");
+        menu.add(0,101,0,"All Admins");
 
 
         return super.onCreateOptionsMenu(menu);
@@ -322,8 +324,8 @@ public class RegisterAdminActivity extends AppCompatActivity implements Compound
         int id = item.getItemId();
 
         if(id == 101){
-//            Intent i = new Intent(RegisterAdminActivity.this, RegisterAdminActivity.class);
-//            startActivity(i);
+            Intent i = new Intent(RegisterAdminActivity.this, AllAdminRegisterActivity.class);
+            startActivity(i);
         }
 
         return super.onOptionsItemSelected(item);

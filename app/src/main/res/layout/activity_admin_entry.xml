@@ -5,38 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="auribises.com.visitorbook.Activites.ProfileActivity">
+    tools:context="auribises.com.visitorbook.Activites.AdminEntryActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:orientation="vertical"
-        android:background="@color/colorAccent">
+        android:background="@color/colorAccent"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Registration"
-            android:layout_marginTop="36dp"
-            android:textSize="20dp"
             android:layout_gravity="center"
-            android:textColor="@color/white"/>
+            android:layout_marginTop="36dp"
+            android:text="Enter Visitor Details"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
 
 
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@color/colorPrimaryDark"/>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:orientation="vertical"
             android:padding="16dp">
@@ -64,15 +60,6 @@
                 android:hint="Enter the Email"
                 android:inputType="textEmailAddress" />
 
-            <EditText
-                android:id="@+id/editTextBirthdate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:focusableInTouchMode="false"
-                android:hint="Enter the Birth Date"
-                android:onClick="showDatePicker" />
-
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -91,9 +78,7 @@
                     android:layout_height="wrap_content"
                     android:text="Female" />
 
-
             </RadioGroup>
-
 
             <EditText
                 android:id="@+id/editTextAddress"
@@ -104,40 +89,88 @@
                 android:inputType="text" />
 
             <EditText
-                android:id="@+id/editTextQualification"
+                android:id="@+id/editTextPurpose"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:hint="Enter the Qualification"
+                android:hint="Enter the Purpose"
                 android:inputType="text" />
 
             <EditText
-                android:id="@+id/editTextExperience"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:hint="Enter the Experience"
-                android:inputType="text" />
+                android:id="@+id/editTextDate"
+                android:hint="Date"
+                android:onClick="showDatePicker"
+                android:focusableInTouchMode="false"
+                android:layout_marginTop="10dp"/>
 
             <EditText
-                android:id="@+id/passworda"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/editTextTime"
+                android:hint="Time"
+                android:focusableInTouchMode="false"
+                android:onClick="showTimePicker"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:id="@+id/editTextAdmin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:ems="10"
-                android:hint="Enter the Password"
-                android:inputType="textPassword" />
+                android:hint="Enter Admin Name"
+                android:inputType="textPersonName" />
+
+            <Spinner
+                android:id="@+id/spinnerIDProof"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+            </Spinner>
+
+            <EditText
+                android:id="@+id/editTextIDproofNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Enter the IDProof Number"
+                android:inputType="text" />
+
+            <Spinner
+                android:id="@+id/spinnerVehicle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+            </Spinner>
+
+            <EditText
+                android:id="@+id/editTextVehicleNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:hint="Enter the Vehicle Number"
+                android:inputType="text" />
 
             <Button
-                android:id="@+id/buttonRegister"
+                android:id="@+id/buttonSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@color/colorPrimary"
-                android:onClick="onclickProfile"
-                android:text="Update"
+                android:background="@drawable/circle"
+                android:onClick="onclickadmin"
+                android:text="Submit"
                 android:textColor="@color/white" />
 
         </LinearLayout>
+
     </ScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/colorPrimaryDark"/>
+
 </LinearLayout>

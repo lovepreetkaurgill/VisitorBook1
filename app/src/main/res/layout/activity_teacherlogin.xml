@@ -107,7 +107,7 @@
                 android:layout_marginTop="30dp"
                 android:layout_gravity="center"
                 android:textColor="@color/white"
-                android:background="@color/colorPrimaryDark"
+                android:background="@drawable/circle"
                 android:onClick="onClickTeacher" />
             <TextView
                 android:id="@+id/forgotpasswordt"

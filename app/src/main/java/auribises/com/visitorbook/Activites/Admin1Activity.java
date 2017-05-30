@@ -25,14 +25,14 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import java.util.ArrayList;
-import auribises.com.visitorbook.Adapters.VehicleAdapter;
-import auribises.com.visitorbook.Class.Vehicle;
+import auribises.com.visitorbook.Adapters.AdminentryAdapter;
+import auribises.com.visitorbook.Class.Adminentry;
 import auribises.com.visitorbook.R;
 import auribises.com.visitorbook.Util;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class Vehicle1Activity extends AppCompatActivity implements AdapterView.OnItemClickListener{
+public class Admin1Activity extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
     @InjectView(R.id.listView)
     ListView listView;
@@ -40,13 +40,13 @@ public class Vehicle1Activity extends AppCompatActivity implements AdapterView.O
     @InjectView(R.id.editTextSearch)
     EditText eTxtSearch;
 
-    ArrayList<Vehicle> vehiclesList;
+    ArrayList<Adminentry> adminentryList;
 
     ContentResolver resolver;
 
-    VehicleAdapter adapter;
+    AdminentryAdapter adapter;
 
-    Vehicle vehicle;
+    Adminentry adminentry;
     int pos;
 
     RequestQueue requestQueue;
@@ -56,7 +56,7 @@ public class Vehicle1Activity extends AppCompatActivity implements AdapterView.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_vehicle);
+        setContentView(R.layout.activity_all_adminentry);
 
         ButterKnife.inject(this);
 
@@ -66,7 +66,6 @@ public class Vehicle1Activity extends AppCompatActivity implements AdapterView.O
 
         requestQueue = Volley.newRequestQueue(this);
         resolver = getContentResolver();
-
 
         eTxtSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -95,36 +94,43 @@ public class Vehicle1Activity extends AppCompatActivity implements AdapterView.O
 
         progressDialog.show();
 
-        vehiclesList = new ArrayList<>();
+        adminentryList = new ArrayList<>();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Util.RETRIEVE_VEHICLE_PHP, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Util.RETRIEVE_ADMINENTRY_PHP, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
                 try {
                     Log.i("test",response.toString());
                     JSONObject jsonObject = new JSONObject(response);
-                    JSONArray jsonArray = jsonObject.getJSONArray("vehicle");
+                    JSONArray jsonArray = jsonObject.getJSONArray("adminentry");
 
                     int id=0;
-                    String n="",p="",e="",g="",v="",vn="";
+                    String n="",p="",e="",g="",a="",pu="",d="",ti="",ad="",idp="",idpn="",v="",vn="";
                     for(int i=0;i<jsonArray.length();i++){
                         JSONObject jObj = jsonArray.getJSONObject(i);
 
                         id = jObj.getInt("id");
-                        n = jObj.getString("Name");
-                        p = jObj.getString("Phone");
-                        e = jObj.getString("Email");
-                        g = jObj.getString("Gender");
-                        v = jObj.getString("Vehicle");
-                        vn = jObj.getString("Vehiclenumber");
+                        n = jObj.getString("name");
+                        p = jObj.getString("phone");
+                        e = jObj.getString("email");
+                        g = jObj.getString("gender");
+                        a = jObj.getString("address");
+                        pu = jObj.getString("purpose");
+                        d = jObj.getString("date");
+                        ti = jObj.getString("time");
+                        ad = jObj.getString("admin");
+                        idp = jObj.getString("idproof");
+                        idpn = jObj.getString("idproofnumber");
+                        v = jObj.getString("vehicle");
+                        vn = jObj.getString("vehiclenumber");
 
-                        vehiclesList.add(new Vehicle(id,n,p,e,g,v,vn));
+                        adminentryList.add(new Adminentry(id,n,p,e,g,a,pu,d,ti,ad,idp,idpn,v,vn));
                     }
 
-                    adapter = new VehicleAdapter(Vehicle1Activity.this,R.layout.vehicle1_list_item, vehiclesList);
+                    adapter = new AdminentryAdapter(Admin1Activity.this,R.layout.admin1_list_item, adminentryList);
                     listView.setAdapter(adapter);
-                    listView.setOnItemClickListener(Vehicle1Activity.this);
+                    listView.setOnItemClickListener(Admin1Activity.this);
 
                     progressDialog.dismiss();
 
@@ -132,9 +138,8 @@ public class Vehicle1Activity extends AppCompatActivity implements AdapterView.O
                     Log.i("test",e.toString());
                     e.printStackTrace();
                     progressDialog.dismiss();
-                    Toast.makeText(Vehicle1Activity.this,"Some Exception",Toast.LENGTH_LONG).show();
+                    Toast.makeText(Admin1Activity.this,"Some Exception",Toast.LENGTH_LONG).show();
                 }
-
 
             }
         }, new Response.ErrorListener() {
@@ -142,7 +147,7 @@ public class Vehicle1Activity extends AppCompatActivity implements AdapterView.O
             public void onErrorResponse(VolleyError error) {
                 Log.i("test",error.toString());
                 progressDialog.dismiss();
-                Toast.makeText(Vehicle1Activity.this,"Some Error",Toast.LENGTH_LONG).show();
+                Toast.makeText(Admin1Activity.this,"Some Error",Toast.LENGTH_LONG).show();
             }
         });
 
@@ -154,30 +159,37 @@ public class Vehicle1Activity extends AppCompatActivity implements AdapterView.O
         //2. Convert Each Record into an Object of Type Teacher
         //3. Put the objects into ArrayList
 
-        vehiclesList = new ArrayList<>();
+        adminentryList = new ArrayList<>();
 
-        String[] projection = {Util.COL_IDVEHICLE,Util.COL_NAMEVEHICLE,Util.COL_PHONEVEHICLE,Util.COL_EMAILVEHICLE,Util.COL_GENDERVEHICLE,Util.COL_VEHICLEVEHICLE,Util.COL_VEHICLENUMBERVEHICLE};
+        String[] projection = {Util.COL_IDVISITOR,Util.COL_NAMEVISITOR,Util.COL_PHONEVISITOR,Util.COL_EMAILVISITOR,Util.COL_GENDERVISITOR,Util.COL_ADDRESSVISITOR,Util.COL_PURPOSEVISITOR,Util.COL_DATEVISITOR,Util.COL_TIMEVISITOR,Util.COL_ADMINVISITOR,Util.COL_IDPROOFVISITOR,Util.COL_IDPROOFNUBERVISITOR,Util.COL_VEHICLEVISITOR,Util.COL_VEHICLENUMBERVISITOR};
 
-        Cursor cursor = resolver.query(Util.VEHICLE_URI,projection,null,null,null);
+        Cursor cursor = resolver.query(Util.ADMINENTRY_URI,projection,null,null,null);
 
         if(cursor!=null){
 
             int i=0;
-            String n="",p="",e="",g="",v="",vn="";
+            String n="",p="",e="",g="",a="",pu="",d="",ti="",ad="",idp="",idpn="",v="",vn="";
 
             while (cursor.moveToNext()){
-                i = cursor.getInt(cursor.getColumnIndex(Util.COL_IDVEHICLE));
-                n = cursor.getString(cursor.getColumnIndex(Util.COL_NAMEVEHICLE));
-                p = cursor.getString(cursor.getColumnIndex(Util.COL_PHONEVEHICLE));
-                e = cursor.getString(cursor.getColumnIndex(Util.COL_EMAILVEHICLE));
-                g = cursor.getString(cursor.getColumnIndex(Util.COL_GENDERVEHICLE));
-                v = cursor.getString(cursor.getColumnIndex(Util.COL_VEHICLEVEHICLE));
-                vn = cursor.getString(cursor.getColumnIndex(Util.COL_VEHICLENUMBERVEHICLE));
+                i = cursor.getInt(cursor.getColumnIndex(Util.COL_IDVISITOR));
+                n = cursor.getString(cursor.getColumnIndex(Util.COL_NAMEVISITOR));
+                p = cursor.getString(cursor.getColumnIndex(Util.COL_PHONEVISITOR));
+                e = cursor.getString(cursor.getColumnIndex(Util.COL_EMAILVISITOR));
+                g = cursor.getString(cursor.getColumnIndex(Util.COL_GENDERVISITOR));
+                a = cursor.getString(cursor.getColumnIndex(Util.COL_ADDRESSVISITOR));
+                pu = cursor.getString(cursor.getColumnIndex(Util.COL_PURPOSEVISITOR));
+                d = cursor.getString(cursor.getColumnIndex(Util.COL_DATEVISITOR));
+                ti = cursor.getString(cursor.getColumnIndex(Util.COL_TIMEVISITOR));
+                ad = cursor.getString(cursor.getColumnIndex(Util.COL_ADMINVISITOR));
+                idp = cursor.getString(cursor.getColumnIndex(Util.COL_IDPROOFVISITOR));
+                idpn = cursor.getString(cursor.getColumnIndex(Util.COL_IDPROOFNUBERVISITOR));
+                v = cursor.getString(cursor.getColumnIndex(Util.COL_VEHICLEVISITOR));
+                vn = cursor.getString(cursor.getColumnIndex(Util.COL_VEHICLENUMBERVISITOR));
 
-                vehiclesList.add(new Vehicle(i,n,p,e,g,v,vn));
+                adminentryList.add(new Adminentry(i,n,p,e,g,a,pu,d,ti,ad,idp,idpn,v,vn));
             }
 
-            adapter = new VehicleAdapter(this,R.layout.vehicle1_list_item, vehiclesList);
+            adapter = new AdminentryAdapter(this,R.layout.admin1_list_item, adminentryList);
             listView.setAdapter(adapter);
             listView.setOnItemClickListener(this);
         }
@@ -186,7 +198,7 @@ public class Vehicle1Activity extends AppCompatActivity implements AdapterView.O
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         pos = i;
-        vehicle = vehiclesList.get(i);
+        adminentry = adminentryList.get(i);
         showOptions();
     }
 
@@ -199,25 +211,24 @@ public class Vehicle1Activity extends AppCompatActivity implements AdapterView.O
 
                 switch (i){
                     case 0:
-                        showVehicle();
+                        showAdminentry();
                         break;
 
                     case 1:
-                        Intent intent = new Intent(Vehicle1Activity.this,Vehicle1Activity.class);
-                        intent.putExtra("keyVehicle",vehicle);
+                        Intent intent = new Intent(Admin1Activity.this,Admin1Activity.class);
+                        intent.putExtra("keyAdminentry",adminentry);
                         startActivity(intent);
                         break;
                 }
-
             }
         });
         builder.create().show();
     }
 
-    void showVehicle(){
+    void showAdminentry(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Details of "+ vehicle.getName());
-        builder.setMessage(vehicle.toString());
+        builder.setTitle("Details of "+ adminentry.getName());
+        builder.setMessage(adminentry.toString());
         builder.setPositiveButton("Done",null);
         builder.create().show();
     }

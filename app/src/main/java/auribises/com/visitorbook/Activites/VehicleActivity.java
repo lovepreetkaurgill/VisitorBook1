@@ -201,12 +201,12 @@ public class VehicleActivity extends AppCompatActivity implements CompoundButton
                 Log.i("test",vehicle.toString());
                 if(updateMode)
                     map.put("id",String.valueOf(rcvVehicle.getId()));
-                map.put("Name", vehicle.getName());
-                map.put("Phone", vehicle.getPhone());
-                map.put("Email", vehicle.getEmail());
-                map.put("Gender", vehicle.getGender());
-                map.put("Vehicle", vehicle.getVehicle());
-                map.put("Vehiclenumber", vehicle.getVehiclenumber());
+                map.put("name", vehicle.getName());
+                map.put("phone", vehicle.getPhone());
+                map.put("email", vehicle.getEmail());
+                map.put("gender", vehicle.getGender());
+                map.put("vehicle", vehicle.getVehicle());
+                map.put("vehiclenumber", vehicle.getVehiclenumber());
 
                 return map;
             }

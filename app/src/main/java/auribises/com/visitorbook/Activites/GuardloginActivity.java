@@ -104,7 +104,6 @@ public class GuardloginActivity extends AppCompatActivity {
                 Intent i = new Intent(GuardloginActivity.this,GuardChangePasswordActivity.class);
                 startActivity(i);
                 //finish();
-
             }
         }
     }

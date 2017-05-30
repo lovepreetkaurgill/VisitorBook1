@@ -107,7 +107,7 @@
                 android:layout_height="49dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:background="@color/colorPrimaryDark"
+                android:background="@drawable/circle"
                 android:onClick="onClickAdmin"
                 android:text="Login"
                 android:textColor="@color/white" />

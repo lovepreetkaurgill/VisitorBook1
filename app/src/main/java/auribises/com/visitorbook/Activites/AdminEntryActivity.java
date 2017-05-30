@@ -11,6 +11,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -41,13 +42,14 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import auribises.com.visitorbook.Class.Adminentry;
 import auribises.com.visitorbook.Class.Visitorentry;
 import auribises.com.visitorbook.R;
 import auribises.com.visitorbook.Util;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class VisitorEntryActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
+public class AdminEntryActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
 
 
     @InjectView(R.id.editTextName)
@@ -77,12 +79,8 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
     @InjectView(R.id.editTextTime)
     EditText eTxtTime;
 
-    @InjectView(R.id.editTextTeacher)
-    EditText eTxtTeacher;
-
-    @InjectView(R.id.spinnerBranch)
-    Spinner spBranch;
-    ArrayAdapter<String> adapter;
+    @InjectView(R.id.editTextAdmin)
+    EditText eTxtAdmin;
 
     @InjectView(R.id.spinnerIDProof)
     Spinner spIDProof;
@@ -101,7 +99,7 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
     @InjectView(R.id.buttonSubmit)
     Button btnSubmit;
 
-    Visitorentry visitorentry, rcvVisitorentry;
+    Adminentry adminentry, rcvAdminentry;
 
     ContentResolver resolver;
 
@@ -139,7 +137,7 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_visitor_entry);
+        setContentView(R.layout.activity_admin_entry);
 
         ButterKnife.inject(this);
 
@@ -150,36 +148,7 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
         progressDialog.setMessage("Please Wait..");
         progressDialog.setCancelable(false);
 
-        visitorentry = new Visitorentry();
-
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item);
-        adapter.add("--Select Branch--");
-        adapter.add("Applied Sciences");
-        adapter.add("Civil Engineering");
-        adapter.add("Electrical Engineering");
-        adapter.add("Mechanical Engineering");
-        adapter.add("Electroncis & Communication Engineering");
-        adapter.add("Computer Science & Engineering");
-        adapter.add("Information Technology");
-        adapter.add("Production Engineering");
-        adapter.add("Business Administration");
-        adapter.add("Computer Applications");;
-
-        spBranch.setAdapter(adapter);
-
-        spBranch.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if(i != 0){
-                    visitorentry.setBranch(adapter.getItem(i));
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+        adminentry = new Adminentry();
 
         adapter1 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item);
         adapter1.add("--Select IDProof--");
@@ -194,7 +163,7 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i != 0){
-                    visitorentry.setIDProof(adapter1.getItem(i));
+                    adminentry.setIDProof(adapter1.getItem(i));
                 }
             }
 
@@ -206,11 +175,11 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
 
         adapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item);
         adapter2.add("--Vehicle Type--");
+        adapter2.add("None");
         adapter2.add("Car");
         adapter2.add("Bike");
         adapter2.add("Activa");
-        adapter2.add("Auto");
-        adapter2.add("Bus");
+
 
         spVehicle.setAdapter(adapter2);
 
@@ -218,7 +187,7 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 if(i != 0){
-                    visitorentry.setVehicle(adapter2.getItem(i));
+                    adminentry.setVehicle(adapter2.getItem(i));
                 }
             }
 
@@ -236,44 +205,32 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
         requestQueue = Volley.newRequestQueue(this);
 
         Intent rcv = getIntent();
-        updateMode = rcv.hasExtra("keyVisitorentry");
+        updateMode = rcv.hasExtra("keyAdminentry");
 
 
         if(updateMode){
-            rcvVisitorentry = (Visitorentry)rcv.getSerializableExtra("keyVisitorentry");
-            eTxtName.setText(rcvVisitorentry.getName());
-            eTxtPhone.setText(rcvVisitorentry.getPhone());
-            eTxtEmail.setText(rcvVisitorentry.getEmail());
-            eTxtAddress.setText(rcvVisitorentry.getAddress());
-            eTxtPurpose.setText(rcvVisitorentry.getPurpose());
-            eTxtDate.setText(rcvVisitorentry.getDate());
-            eTxtTime.setText(rcvVisitorentry.getTime());
-            eTxtTeacher.setText(rcvVisitorentry.getTeacher());
-            eTxtIDProofNumber.setText(rcvVisitorentry.getIDProofnumber());
-            eTxtVehicleNumber.setText(rcvVisitorentry.getVehiclenumber());
+            rcvAdminentry = (Adminentry)rcv.getSerializableExtra("keyAdminentry");
+            eTxtName.setText(rcvAdminentry.getName());
+            eTxtPhone.setText(rcvAdminentry.getPhone());
+            eTxtEmail.setText(rcvAdminentry.getEmail());
+            eTxtAddress.setText(rcvAdminentry.getAddress());
+            eTxtPurpose.setText(rcvAdminentry.getPurpose());
+            eTxtDate.setText(rcvAdminentry.getDate());
+            eTxtTime.setText(rcvAdminentry.getTime());
+            eTxtAdmin.setText(rcvAdminentry.getAdmin());
+            eTxtIDProofNumber.setText(rcvAdminentry.getIDProofnumber());
+            eTxtVehicleNumber.setText(rcvAdminentry.getVehiclenumber());
 
-            if(rcvVisitorentry.getGender().equals("Male")){
+            if(rcvAdminentry.getGender().equals("Male")){
                 rbMale.setChecked(true);
             }else{
                 rbFemale.setChecked(true);
             }
 
-            Log.i("TEST",adapter+" - "+rcvVisitorentry.getBranch()+" - "+rcvVisitorentry.getIDProof()+" - "+rcvVisitorentry.getVehicle());
-
-            int p = 0;
-            for(int i=0;i<adapter.getCount();i++){
-                if(adapter.getItem(i).equals(rcvVisitorentry.getBranch())){
-                    Log.i("TEST1",adapter.getItem(i)+" - "+rcvVisitorentry.getBranch());
-                    p = i;
-                    break;
-                }
-            }
-            spBranch.setSelection(p);
-
             int q = 0;
             for(int i=0;i<adapter1.getCount();i++){
-                if(adapter1.getItem(i).equals(rcvVisitorentry.getIDProof())){
-                    Log.i("TEST2",adapter1.getItem(i)+" - "+rcvVisitorentry.getIDProof());
+                if(adapter1.getItem(i).equals(rcvAdminentry.getIDProof())){
+                    Log.i("TEST2",adapter1.getItem(i)+" - "+rcvAdminentry.getIDProof());
                     q = i;
                     break;
                 }
@@ -282,8 +239,8 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
 
             int r = 0;
             for(int i=0;i<adapter2.getCount();i++){
-                if(adapter2.getItem(i).equals(rcvVisitorentry.getVehicle())){
-                    Log.i("TEST3",adapter2.getItem(i)+" - "+rcvVisitorentry.getVehicle());
+                if(adapter2.getItem(i).equals(rcvAdminentry.getVehicle())){
+                    Log.i("TEST3",adapter2.getItem(i)+" - "+rcvAdminentry.getVehicle());
                     r = i;
                     break;
                 }
@@ -298,26 +255,26 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
 
         connectivityManager = (ConnectivityManager)getSystemService(CONNECTIVITY_SERVICE);
         networkInfo = connectivityManager.getActiveNetworkInfo();
-        Log.i("test",visitorentry.toString());
+        Log.i("test",adminentry.toString());
 
         return (networkInfo!=null && networkInfo.isConnected());
 
     }
 
-    public void onclickhandler(View view){
+    public void onclickadmin(View view){
         if(view.getId() == R.id.buttonSubmit) {
             btnSubmit.setOnClickListener(this);
 
-            visitorentry.setName(eTxtName.getText().toString().trim());
-            visitorentry.setPhone(eTxtPhone.getText().toString().trim());
-            visitorentry.setEmail(eTxtEmail.getText().toString().trim());
-            visitorentry.setAddress(eTxtAddress.getText().toString().trim());
-            visitorentry.setPurpose(eTxtPurpose.getText().toString().trim());
-            visitorentry.setDate(eTxtDate.getText().toString().trim());
-            visitorentry.setTime(eTxtTime.getText().toString().trim());
-            visitorentry.setTeacher(eTxtTeacher.getText().toString().trim());
-            visitorentry.setIDProofnumber(eTxtIDProofNumber.getText().toString().trim());
-            visitorentry.setVehiclenumber(eTxtVehicleNumber.getText().toString().trim());
+            adminentry.setName(eTxtName.getText().toString().trim());
+            adminentry.setPhone(eTxtPhone.getText().toString().trim());
+            adminentry.setEmail(eTxtEmail.getText().toString().trim());
+            adminentry.setAddress(eTxtAddress.getText().toString().trim());
+            adminentry.setPurpose(eTxtPurpose.getText().toString().trim());
+            adminentry.setDate(eTxtDate.getText().toString().trim());
+            adminentry.setTime(eTxtTime.getText().toString().trim());
+            adminentry.setAdmin(eTxtAdmin.getText().toString().trim());
+            adminentry.setIDProofnumber(eTxtIDProofNumber.getText().toString().trim());
+            adminentry.setVehiclenumber(eTxtVehicleNumber.getText().toString().trim());
 
             //insertIntoDB();
 
@@ -325,11 +282,11 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
                 if (isNetworkConected())
                     insertIntoCloud();
             }else
-                    Toast.makeText(this, "Please connect to Internet", Toast.LENGTH_LONG).show();
-            }else {
-                Toast.makeText(this, "Please correct Input", Toast.LENGTH_LONG).show();
-            }
+                Toast.makeText(this, "Please connect to Internet", Toast.LENGTH_LONG).show();
+        }else {
+            Toast.makeText(this, "Please correct Input", Toast.LENGTH_LONG).show();
         }
+    }
 
 
     void insertIntoCloud(){
@@ -337,9 +294,9 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
         String url="";
 
         if(!updateMode){
-            url = Util.INSERT_VISITORENTRY_PHP;
+            url = Util.INSERT_ADMINENTRY_PHP;
         }else{
-            url = Util.UPDATE_VISITORENTRY_PHP;
+            url = Util.UPDATE_ADMINENTRY_PHP;
         }
 
         progressDialog.show();
@@ -355,74 +312,72 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
                     String message = jsonObject.getString("message");
 
                     if(success == 1){
-                        Toast.makeText(VisitorEntryActivity.this,message,Toast.LENGTH_LONG).show();
+                        Toast.makeText(AdminEntryActivity.this,message,Toast.LENGTH_LONG).show();
 //
                         if(!updateMode){
 
-                            editor.putString(Util.KEY_NAME, visitorentry.getName());
-                            editor.putString(Util.KEY_PHONE, visitorentry.getPhone());
-                            editor.putString(Util.KEY_EMAIL, visitorentry.getEmail());
-                            editor.putString(Util.KEY_ADDRESS, visitorentry.getAddress());
-                            editor.putString(Util.KEY_PURPOSE, visitorentry.getPurpose());
-                            editor.putString(Util.KEY_DATE, visitorentry.getDate());
-                            editor.putString(Util.KEY_TIME, visitorentry.getTime());
-                            editor.putString(Util.KEY_TEACHER, visitorentry.getTeacher());
-                            editor.putString(Util.KEY_BRANCH, visitorentry.getBranch());
-                            editor.putString(Util.KEY_IDPROOF, visitorentry.getIDProof());
-                            editor.putString(Util.KEY_IDPROOFNUMBER, visitorentry.getIDProofnumber());
-                            editor.putString(Util.KEY_VEHICLE, visitorentry.getVehicle());
-                            editor.putString(Util.KEY_VEHICLENUMBER, visitorentry.getVehiclenumber());
+                            editor.putString(Util.KEY_NAME, adminentry.getName());
+                            editor.putString(Util.KEY_PHONE, adminentry.getPhone());
+                            editor.putString(Util.KEY_EMAIL, adminentry.getEmail());
+                            editor.putString(Util.KEY_ADDRESS, adminentry.getAddress());
+                            editor.putString(Util.KEY_PURPOSE, adminentry.getPurpose());
+                            editor.putString(Util.KEY_DATE, adminentry.getDate());
+                            editor.putString(Util.KEY_TIME, adminentry.getTime());
+                            editor.putString(Util.KEY_ADMIN, adminentry.getAdmin());
+                            editor.putString(Util.KEY_IDPROOF, adminentry.getIDProof());
+                            editor.putString(Util.KEY_IDPROOFNUMBER, adminentry.getIDProofnumber());
+                            editor.putString(Util.KEY_VEHICLE, adminentry.getVehicle());
+                            editor.putString(Util.KEY_VEHICLENUMBER, adminentry.getVehiclenumber());
 
                             editor.commit();
 
 //                            Intent home = new Intent(VisitorEntryActivity.this,VisitorEntryActivity.class);
 //                            startActivity(home);
 //                            finish();
-                       }
+                        }
 
                         if(updateMode)
                             finish();
 
                     }else{
-                        Toast.makeText(VisitorEntryActivity.this,message,Toast.LENGTH_LONG).show();
+                        Toast.makeText(AdminEntryActivity.this,message,Toast.LENGTH_LONG).show();
                     }
                     progressDialog.dismiss();
                 }catch (Exception e){
                     e.printStackTrace();
                     progressDialog.dismiss();
-                    Toast.makeText(VisitorEntryActivity.this,"Some Exception",Toast.LENGTH_LONG).show();
+                    Toast.makeText(AdminEntryActivity.this,"Some Exception",Toast.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 progressDialog.dismiss();
-                Toast.makeText(VisitorEntryActivity.this,"Some Error"+error.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(AdminEntryActivity.this,"Some Error"+error.getMessage(),Toast.LENGTH_LONG).show();
             }
         })
         {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> map = new HashMap<>();
-                Log.i("test",visitorentry.toString());
+                Log.i("test",adminentry.toString());
 
                 if(updateMode)
-                    map.put("id",String.valueOf(rcvVisitorentry.getId()));
+                    map.put("id",String.valueOf(rcvAdminentry.getId()));
 
-                map.put("name", visitorentry.getName());
-                map.put("phone", visitorentry.getPhone());
-                map.put("email", visitorentry.getEmail());
-                map.put("gender", visitorentry.getGender());
-                map.put("address", visitorentry.getAddress());
-                map.put("purpose", visitorentry.getPurpose());
-                map.put("date", visitorentry.getDate());
-                map.put("time", visitorentry.getTime());
-                map.put("teacher", visitorentry.getTeacher());
-                map.put("branch", visitorentry.getBranch());
-                map.put("idproof", visitorentry.getIDProof());
-                map.put("idproofnumber", visitorentry.getIDProofnumber());
-                map.put("vehicle", visitorentry.getVehicle());
-                map.put("vehiclenumber", visitorentry.getVehiclenumber());
+                map.put("name", adminentry.getName());
+                map.put("phone", adminentry.getPhone());
+                map.put("email", adminentry.getEmail());
+                map.put("gender", adminentry.getGender());
+                map.put("address", adminentry.getAddress());
+                map.put("purpose", adminentry.getPurpose());
+                map.put("date", adminentry.getDate());
+                map.put("time", adminentry.getTime());
+                map.put("admin", adminentry.getAdmin());
+                map.put("idproof", adminentry.getIDProof());
+                map.put("idproofnumber", adminentry.getIDProofnumber());
+                map.put("vehicle", adminentry.getVehicle());
+                map.put("vehiclenumber", adminentry.getVehiclenumber());
                 return map;
             }
         };
@@ -438,9 +393,9 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
 
         if(b) {
             if (id == R.id.radioButtonMale) {
-                visitorentry.setGender("Male");
+                adminentry.setGender("Male");
             } else {
-                visitorentry.setGender("Female");
+                adminentry.setGender("Female");
             }
         }
     }
@@ -449,31 +404,30 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
 
         ContentValues values = new ContentValues();
 
-        values.put(Util.COL_NAMEVISITOR, visitorentry.getName());
-        values.put(Util.COL_PHONEVISITOR, visitorentry.getPhone());
-        values.put(Util.COL_EMAILVISITOR, visitorentry.getEmail());
-        values.put(Util.COL_GENDERVISITOR, visitorentry.getGender());
-        values.put(Util.COL_ADDRESSVISITOR, visitorentry.getAddress());
-        values.put(Util.COL_PURPOSEVISITOR, visitorentry.getPurpose());
-        values.put(Util.COL_DATEVISITOR, visitorentry.getDate());
-        values.put(Util.COL_TIMEVISITOR, visitorentry.getTime());
-        values.put(Util.COL_TEACHERVISITOR, visitorentry.getTeacher());
-        values.put(Util.COL_BRANCHVISITOR, visitorentry.getBranch());
-        values.put(Util.COL_IDPROOFVISITOR, visitorentry.getIDProof());
-        values.put(Util.COL_IDPROOFNUBERVISITOR, visitorentry.getIDProofnumber());
-        values.put(Util.COL_VEHICLEVISITOR, visitorentry.getVehicle());
-        values.put(Util.COL_VEHICLENUMBERVISITOR, visitorentry.getVehiclenumber());
+        values.put(Util.COL_NAMEVISITOR, adminentry.getName());
+        values.put(Util.COL_PHONEVISITOR, adminentry.getPhone());
+        values.put(Util.COL_EMAILVISITOR, adminentry.getEmail());
+        values.put(Util.COL_GENDERVISITOR, adminentry.getGender());
+        values.put(Util.COL_ADDRESSVISITOR, adminentry.getAddress());
+        values.put(Util.COL_PURPOSEVISITOR, adminentry.getPurpose());
+        values.put(Util.COL_DATEVISITOR, adminentry.getDate());
+        values.put(Util.COL_TIMEVISITOR, adminentry.getTime());
+        values.put(Util.COL_ADMINVISITOR, adminentry.getAdmin());
+        values.put(Util.COL_IDPROOFVISITOR, adminentry.getIDProof());
+        values.put(Util.COL_IDPROOFNUBERVISITOR, adminentry.getIDProofnumber());
+        values.put(Util.COL_VEHICLEVISITOR, adminentry.getVehicle());
+        values.put(Util.COL_VEHICLENUMBERVISITOR, adminentry.getVehiclenumber());
 
         if(!updateMode){
             Uri dummy = resolver.insert(Util.VISITORENTRY_URI,values);
-            Toast.makeText(this, visitorentry.getName()+ " Registered Successfully "+dummy.getLastPathSegment(),Toast.LENGTH_LONG).show();
+            Toast.makeText(this, adminentry.getName()+ " Registered Successfully "+dummy.getLastPathSegment(),Toast.LENGTH_LONG).show();
 
-            Log.i("insertintocloud", visitorentry.toString());
+            Log.i("insertintocloud", adminentry.toString());
 
             clearFields();
         }else{
-            String where = Util.COL_IDVISITOR + " = "+ rcvVisitorentry.getId();
-            int i = resolver.update(Util.VISITORENTRY_URI,values,where,null);
+            String where = Util.COL_IDVISITOR + " = "+ rcvAdminentry.getId();
+            int i = resolver.update(Util.ADMINENTRY_URI,values,where,null);
             if(i>0){
                 Toast.makeText(this,"Updation Successful",Toast.LENGTH_LONG).show();
                 finish();
@@ -493,8 +447,7 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
         eTxtPurpose.setText("");
         eTxtDate.setText("");
         eTxtTime.setText("");
-        eTxtTeacher.setText("");
-        spBranch.setSelection(0);
+        eTxtAdmin.setText("");
         spIDProof.setSelection(0);
         eTxtIDProofNumber.setText("");
         spVehicle.setSelection(0);
@@ -517,7 +470,7 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
 
         if(id == 101){
             Log.i("test","---0");
-            Intent i = new Intent(VisitorEntryActivity.this,AllVisitorentryActivity.class);
+            Intent i = new Intent(AdminEntryActivity.this,AllAdminentryActivity.class);
             startActivityForResult(i,301);
         }
 
@@ -537,55 +490,55 @@ public class VisitorEntryActivity extends AppCompatActivity implements CompoundB
     boolean validateFields(){
         boolean flag = true;
 
-        if(visitorentry.getName().isEmpty()){
+        if(adminentry.getName().isEmpty()){
             flag = false;
             eTxtName.setError("Please Enter Name");
         }
 
-        if(visitorentry.getPhone().isEmpty()){
+        if(adminentry.getPhone().isEmpty()){
             flag = false;
             eTxtPhone.setError("Please Enter Phone");
         }else{
-            if(visitorentry.getPhone().length()<10){
+            if(adminentry.getPhone().length()<10){
                 flag = false;
                 eTxtPhone.setError("Please Enter 10 digits Phone Number");
             }
         }
 
-        if(visitorentry.getEmail().isEmpty()){
+        if(adminentry.getEmail().isEmpty()){
             flag = false;
             eTxtEmail.setError("Please Enter Email");
         }else{
-            if(!(visitorentry.getEmail().contains("@") && visitorentry.getEmail().contains("."))){
+            if(!(adminentry.getEmail().contains("@") && adminentry.getEmail().contains("."))){
                 flag = false;
                 eTxtEmail.setError("Please Enter correct Email");
             }
         }
-        if(visitorentry.getAddress().isEmpty()){
+        if(adminentry.getAddress().isEmpty()){
             flag = false;
             eTxtAddress.setError("Please Enter Address");
         }
-        if(visitorentry.getPurpose().isEmpty()){
+        if(adminentry.getPurpose().isEmpty()){
             flag = false;
             eTxtPurpose.setError("Please Enter Purpose");
         }
-        if(visitorentry.getDate().isEmpty()){
+        if(adminentry.getDate().isEmpty()){
             flag = false;
             eTxtDate.setError("Please Enter Date");
         }
-        if(visitorentry.getTime().isEmpty()){
+        if(adminentry.getTime().isEmpty()){
             flag = false;
             eTxtTime.setError("Please Enter Time");
         }
-        if(visitorentry.getName().isEmpty()){
+        if(adminentry.getName().isEmpty()){
             flag = false;
-            eTxtTeacher.setError("Please Enter Teacher name");
+            eTxtAdmin.setError("Please Enter Admin name");
         }
-        if(visitorentry.getName().isEmpty()){
+        if(adminentry.getName().isEmpty()){
             flag = false;
             eTxtIDProofNumber.setError("Please Enter IDProofNumber");
         }
-        if(visitorentry.getName().isEmpty()){
+        if(adminentry.getName().isEmpty()){
             flag = false;
             eTxtVehicleNumber.setError("Please Enter VehicleNumber");
         }
